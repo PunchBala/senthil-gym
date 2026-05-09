@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#080808"/>
+  <path d="M256 52c46 56 72 101 72 152 0 67-50 114-72 154-22-40-72-87-72-154 0-51 26-96 72-152Z" fill="#ff4d1f"/>
+  <path d="M256 151c25 33 40 60 40 91 0 40-28 68-40 92-12-24-40-52-40-92 0-31 15-58 40-91Z" fill="#ffbf3f"/>
+  <g fill="none" stroke="#f8f7f2" stroke-width="28" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M118 292h276"/>
+    <path d="M86 244v96"/>
+    <path d="M426 244v96"/>
+    <path d="M138 224v136"/>
+    <path d="M374 224v136"/>
+  </g>
+  <text x="256" y="445" text-anchor="middle" font-family="Arial, sans-serif" font-size="72" font-weight="900" fill="#f8f7f2">SG</text>
+</svg>

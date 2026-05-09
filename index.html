@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#111111">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Senthil Gym">
+  <title>Senthil Gym</title>
+  <link rel="manifest" href="manifest.json">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080808;
+      --panel: #141414;
+      --panel-2: #1d1d1d;
+      --text: #f8f7f2;
+      --muted: #aaa59a;
+      --line: #2b2b2b;
+      --fire: #ff4d1f;
+      --gold: #ffbf3f;
+      --green: #34d399;
+      --blue: #38bdf8;
+      --radius: 8px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--text); }
+    body { padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom); }
+    button, input, textarea { font: inherit; }
+    button { color: inherit; }
+    .app { width: min(100%, 620px); min-height: 100vh; margin: 0 auto; display: flex; flex-direction: column; }
+    header { padding: 18px 16px 12px; position: sticky; top: 0; z-index: 10; background: rgba(8,8,8,.94); backdrop-filter: blur(18px); border-bottom: 1px solid rgba(255,255,255,.06); }
+    .topline { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: 28px; line-height: 1; letter-spacing: 0; }
+    h2 { font-size: 20px; margin-top: 4px; }
+    h3 { font-size: 16px; }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .logo { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 8px; background: linear-gradient(135deg, var(--fire), var(--gold)); color: #111; font-weight: 900; box-shadow: 0 10px 30px rgba(255,77,31,.22); }
+    .quote { margin-top: 12px; color: var(--muted); font-size: 14px; line-height: 1.35; }
+    main { flex: 1; padding: 14px 14px 88px; }
+    .screen { display: none; }
+    .screen.active { display: block; animation: rise .16s ease-out; }
+    @keyframes rise { from { opacity: .4; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .stack { display: grid; gap: 10px; }
+    .card, .tile, .exercise, .setting-row { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); }
+    .card { padding: 14px; }
+    .tile { min-height: 78px; padding: 14px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; gap: 8px; cursor: pointer; }
+    .tile strong { font-size: 17px; }
+    .tile span, .muted { color: var(--muted); font-size: 13px; line-height: 1.35; }
+    .primary { background: linear-gradient(135deg, var(--fire), #ff8a2a); color: #140600; border: 0; font-weight: 900; }
+    .accent { color: var(--gold); }
+    .pill { display: inline-flex; align-items: center; width: max-content; gap: 6px; min-height: 24px; padding: 3px 8px; border-radius: 999px; background: var(--panel-2); border: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+    .progress { height: 7px; background: #252525; border-radius: 999px; overflow: hidden; }
+    .progress > i { display: block; height: 100%; background: linear-gradient(90deg, var(--fire), var(--gold)); width: 0%; }
+    .tabs { position: fixed; left: 50%; bottom: 0; transform: translateX(-50%); width: min(100%, 620px); display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 8px 10px calc(8px + env(safe-area-inset-bottom)); background: rgba(8,8,8,.96); border-top: 1px solid rgba(255,255,255,.08); backdrop-filter: blur(18px); }
+    .tab { border: 1px solid var(--line); background: var(--panel); border-radius: 8px; min-height: 46px; display: grid; place-items: center; gap: 2px; font-size: 11px; color: var(--muted); }
+    .tab b { font-size: 18px; line-height: 1; color: var(--text); }
+    .tab.active { border-color: rgba(255,191,63,.7); color: var(--gold); }
+    .back { border: 1px solid var(--line); background: var(--panel); border-radius: 8px; padding: 9px 11px; min-width: 44px; }
+    .section-title { margin: 16px 0 8px; display: flex; justify-content: space-between; align-items: end; gap: 10px; }
+    .list-only { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.55; font-size: 14px; }
+    .exercise { padding: 12px; display: grid; gap: 10px; }
+    .exercise-head { display: flex; justify-content: space-between; align-items: start; gap: 10px; }
+    .demo { border: 1px solid rgba(255,191,63,.35); background: rgba(255,191,63,.08); color: var(--gold); text-decoration: none; border-radius: 8px; padding: 7px 9px; font-size: 12px; white-space: nowrap; }
+    .sets { display: grid; gap: 8px; }
+    .set-row { display: grid; grid-template-columns: 38px 1fr; align-items: center; gap: 8px; }
+    .check { width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--line); background: #202020; display: grid; place-items: center; font-weight: 900; }
+    .check.done { background: var(--green); color: #04120c; border-color: var(--green); }
+    input, textarea { width: 100%; border: 1px solid var(--line); background: #0e0e0e; color: var(--text); border-radius: 8px; padding: 10px; outline: 0; min-height: 40px; }
+    textarea { resize: vertical; min-height: 74px; }
+    .meal { display: grid; grid-template-columns: 1fr 44px; align-items: center; gap: 10px; padding: 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; }
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .action { border: 1px solid var(--line); background: var(--panel-2); border-radius: 8px; padding: 10px 12px; }
+    .danger { border-color: rgba(248,113,113,.4); color: #fca5a5; }
+    .setting-row { padding: 12px; display: grid; gap: 8px; }
+    .switchline { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .mini { font-size: 12px; color: var(--muted); }
+    @media (max-width: 380px) {
+      .grid { grid-template-columns: 1fr; }
+      h1 { font-size: 25px; }
+      main { padding-left: 10px; padding-right: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="topline">
+        <div class="brand">
+          <div class="logo">SG</div>
+          <div>
+            <h1>Senthil Gym</h1>
+            <p class="muted" id="subhead">Welcome, Senthil</p>
+          </div>
+        </div>
+        <button class="back" id="backBtn" hidden>Back</button>
+      </div>
+      <p class="quote">"Process is more important than the result." <span class="accent">- MS Dhoni</span></p>
+    </header>
+
+    <main>
+      <section id="home" class="screen active"></section>
+      <section id="workout" class="screen"></section>
+      <section id="food" class="screen"></section>
+      <section id="export" class="screen"></section>
+      <section id="settings" class="screen"></section>
+    </main>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="home"><b>⌂</b>Home</button>
+      <button class="tab" data-tab="workout"><b>▦</b>Workout</button>
+      <button class="tab" data-tab="food"><b>✓</b>Food</button>
+      <button class="tab" data-tab="settings"><b>⚙</b>More</button>
+    </nav>
+  </div>
+
+  <script>
+    const YT = q => `https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`;
+    const baseDays = [
+      {
+        day: 1, focus: "Lower + Push + Upper Abs",
+        warmup: ["Easy Treadmill Walk - 5 minutes", "Arm Circles - 10 forward + 10 backward x 2", "Shoulder Rotations - 10 each direction x 2", "Leg Swings - 10 front-back + 10 side-side each leg", "Ankle Rotations - 10 each direction per ankle"],
+        cooldown: ["Hamstring Stretch - 30 seconds each side", "Doorway Chest Stretch - 30 seconds each side", "Child's Pose Lat Stretch - 45 seconds"],
+        items: [
+          ex("Cable Crunch", "15 reps", 3, "45 seconds", true, "cable", "Curl ribs toward hips without pulling with your arms.", "cable crunch proper form beginner short"),
+          ex("Machine Chest Press", "10 reps", 3, "90 seconds", true, "machine", "Keep shoulder blades stable and press evenly.", "machine chest press proper form beginner short"),
+          ex("Barbell Squat", "8 reps", 3, "120 seconds", true, "barbell", "Keep knees tracking with toes and brace before each rep.", "barbell squat proper form beginner short"),
+          ex("Seated Cable Row", "12 reps", 3, "90 seconds", true, "cable", "Pull with elbows and avoid shrugging.", "seated cable row proper form short"),
+          ex("Leg Extension", "12 reps", 2, "60 seconds", true, "machine", "Control the top position without swinging.", "leg extension machine proper form short"),
+          ex("Cable External Rotation", "12 reps each side", 2, "45 seconds", true, "cable", "Keep elbow close to your side and move slowly.", "cable external rotation rotator cuff proper form short"),
+          cardio("Incline Treadmill Walk", "20 minutes", "Use a steady pace and moderate incline without holding the handles.", "incline treadmill walking proper form short")
+        ]
+      },
+      {
+        day: 2, focus: "Posterior Chain + Pull + Lower Abs",
+        warmup: ["Stationary Bike - 5 minutes", "Cat-Cow - 8 reps x 2", "Bodyweight Back Extension - 10 reps x 2", "Hip Hinge Drill - 10 reps x 2", "Shoulder Blade Squeezes - 12 reps x 2"],
+        cooldown: ["Hip Flexor Stretch - 30 seconds each side", "Lat Stretch - 30 seconds each side", "Calf Stretch - 30 seconds each side"],
+        items: [
+          ex("Captain's Chair Knee Raise", "10 reps", 3, "45 seconds", false, "core", "Lift knees with control instead of swinging.", "captains chair knee raise proper form beginner short"),
+          ex("Barbell Romanian Deadlift", "8 reps", 3, "120 seconds", true, "barbell", "Keep the bar close and feel the stretch in your hamstrings.", "barbell romanian deadlift proper form beginner short"),
+          ex("Lat Pulldown", "12 reps", 3, "90 seconds", true, "cable", "Pull elbows down toward your ribs without leaning back hard.", "lat pulldown proper form beginner short"),
+          ex("Seated Leg Curl", "12 reps", 3, "75 seconds", true, "machine", "Control both the curl and the return.", "seated leg curl proper form beginner short"),
+          ex("Neutral-Grip Dumbbell Incline Press", "10 reps", 2, "90 seconds", true, "dumbbell", "Keep elbows slightly tucked and stop if the shoulder feels irritated.", "neutral grip incline dumbbell press proper form short"),
+          ex("Cable Face Pull", "15 reps", 2, "60 seconds", true, "cable", "Pull toward eye level and keep shoulders down.", "cable face pull proper form short"),
+          cardio("Elliptical", "20 minutes", "Keep effort steady and sustainable.", "elliptical machine beginner proper form short")
+        ]
+      },
+      {
+        day: 3, focus: "Legs + Shoulders + Side Abs",
+        warmup: ["Easy Treadmill Walk - 5 minutes", "Hip Circles - 10 each direction", "Dynamic Hamstring Sweep - 8 reps each side", "Bodyweight Squat - 10 reps x 2", "Shoulder Wall Slide - 10 reps x 2"],
+        cooldown: ["Quad Stretch - 30 seconds each side", "Figure-4 Glute Stretch - 30 seconds each side", "Cross-Body Shoulder Stretch - 30 seconds each side"],
+        items: [
+          ex("Side Plank Hip Raise", "10 reps each side", 3, "45 seconds", false, "core", "Keep hips stacked and lift without twisting.", "side plank hip raise proper form short"),
+          ex("Leg Press", "12 reps", 3, "90 seconds", true, "machine", "Keep knees in line with toes and avoid locking out hard.", "leg press proper form beginner short"),
+          ex("Assisted Pull-Up Machine", "8 reps", 3, "90 seconds", true, "machine", "Use enough assistance to keep the reps controlled.", "assisted pull up machine proper form beginner short"),
+          ex("Dumbbell Walking Lunge", "10 steps each leg", 2, "90 seconds", true, "dumbbell", "Keep steps controlled and knees tracking forward.", "dumbbell walking lunge proper form short"),
+          ex("Machine Shoulder Press", "10 reps", 2, "90 seconds", true, "machine", "Use a light weight and keep the shoulder range comfortable.", "machine shoulder press proper form beginner short"),
+          ex("Standing Calf Raise", "15 reps", 3, "60 seconds", true, "machine", "Pause briefly at the top and lower slowly.", "standing calf raise machine proper form short"),
+          cardio("Incline Treadmill Walk", "22 minutes", "Keep it steady rather than maximal.", "incline treadmill walking proper form short")
+        ]
+      },
+      {
+        day: 4, focus: "Full Body + Arms + Mid/Core Stability",
+        warmup: ["Rowing Machine - 5 minutes", "Arm Rotations - 10 each direction x 2", "Scapular Push-Up - 10 reps x 2", "Dynamic Hamstring Sweep - 8 reps each side", "Ankle Rotations - 10 each direction per ankle"],
+        cooldown: ["Seated Forward Fold - 40 seconds", "Doorway Chest Stretch - 30 seconds each side", "Upper Trap Stretch - 30 seconds each side"],
+        items: [
+          ex("Plank", "30 seconds", 3, "45 seconds", false, "core", "Keep ribs down and squeeze glutes.", "proper plank form beginner short"),
+          ex("Incline Push-Up", "10 reps", 3, "75 seconds", false, "bodyweight", "Keep elbows slightly tucked and body straight.", "incline push up proper form beginner short"),
+          ex("Barbell Row", "10 reps", 3, "90 seconds", true, "barbell", "Keep your back neutral and pull toward your lower ribs.", "barbell row proper form beginner short"),
+          ex("Goblet Squat", "12 reps", 3, "90 seconds", true, "dumbbell", "Hold the dumbbell close and keep your torso tall.", "goblet squat proper form beginner short"),
+          ex("Cable Pallof Press", "10 reps each side", 2, "60 seconds", true, "cable", "Resist rotation and keep your torso square.", "pallof press proper form beginner short"),
+          ex("Barbell Bicep Curl", "12 reps", 2, "60 seconds", true, "barbell", "Keep elbows still and avoid swinging.", "barbell bicep curl proper form short"),
+          ex("Rope Triceps Pushdown", "12 reps", 2, "60 seconds", true, "cable", "Keep elbows near your sides.", "rope triceps pushdown proper form short"),
+          cardio("Stationary Bike", "12 minutes", "Keep a moderate rhythm without turning it into a sprint.", "stationary bike cardio proper form short")
+        ]
+      },
+      {
+        day: 5, focus: "Swim + Spa Recovery", warmup: [], cooldown: [],
+        items: [
+          cardio("Easy Swim", "500 meters or 20 minutes", "Swim at a relaxed pace and focus on smooth breathing.", "beginner freestyle swimming technique short"),
+          cardio("Spa", "20-30 minutes", "Hydrate, keep it comfortable, and leave early if you feel lightheaded.", "spa recovery sauna steam room safety")
+        ]
+      },
+      { day: 6, focus: "Rest", warmup: [], cooldown: [], items: [] },
+      { day: 7, focus: "Rest", warmup: [], cooldown: [], items: [] }
+    ];
+
+    const weekNotes = {
+      1: "Start controlled. Use weights that feel like you could still do 2-3 clean reps at the end of each set.",
+      2: "Slightly increase reps or time. Add weight only if Week 1 felt smooth and shoulder-friendly.",
+      3: "Increase training density slightly. Main lifts can move up by a small weight increase if all Week 2 sets felt controlled.",
+      4: "Strongest week of the first block. Add small weight increases only where form stayed clean. Do not chase max effort."
+    };
+
+    const changes = {
+      2: {
+        1: {"Easy Treadmill Walk":"6 minutes","Arm Circles":"12 forward + 12 backward","Shoulder Rotations":"12 reps each direction","Leg Swings":"12 front-back + 12 side-side each leg","Ankle Rotations":"12 each direction per ankle","Cable Crunch":["18 reps",3],"Machine Chest Press":["11 reps",3],"Barbell Squat":["9 reps",3],"Seated Cable Row":["13 reps",3],"Leg Extension":["13 reps",2],"Cable External Rotation":["13 reps each side",2],"Incline Treadmill Walk":["22 minutes",1]},
+        2: {"Stationary Bike":"6 minutes","Cat-Cow":"9 reps","Bodyweight Back Extension":"12 reps","Hip Hinge Drill":"12 reps","Shoulder Blade Squeezes":"14 reps","Captain's Chair Knee Raise":["11 reps",3],"Barbell Romanian Deadlift":["9 reps",3],"Lat Pulldown":["13 reps",3],"Seated Leg Curl":["13 reps",3],"Neutral-Grip Dumbbell Incline Press":["11 reps",2],"Cable Face Pull":["16 reps",2],"Elliptical":["22 minutes",1]},
+        3: {"Easy Treadmill Walk":"6 minutes","Hip Circles":"12 each direction","Dynamic Hamstring Sweep":"9 reps each side","Bodyweight Squat":"12 reps","Shoulder Wall Slide":"12 reps","Side Plank Hip Raise":["11 reps each side",3],"Leg Press":["13 reps",3],"Assisted Pull-Up Machine":["9 reps",3],"Dumbbell Walking Lunge":["11 steps each leg",2],"Machine Shoulder Press":["11 reps",2],"Standing Calf Raise":["16 reps",3],"Incline Treadmill Walk":["24 minutes",1]},
+        4: {"Rowing Machine":"6 minutes","Arm Rotations":"12 reps each direction","Scapular Push-Up":"12 reps","Dynamic Hamstring Sweep":"9 reps each side","Ankle Rotations":"12 each direction per ankle","Plank":["35 seconds",3],"Incline Push-Up":["11 reps",3],"Barbell Row":["11 reps",3],"Goblet Squat":["13 reps",3],"Cable Pallof Press":["11 reps each side",2],"Barbell Bicep Curl":["13 reps",2],"Rope Triceps Pushdown":["13 reps",2],"Stationary Bike":["14 minutes",1]},
+        5: {"Easy Swim":["500 meters or 20 minutes",1]}
+      },
+      3: {
+        1: {"Cable Crunch":["15 reps",4],"Machine Chest Press":["10 reps",4],"Barbell Squat":["8 reps",4],"Seated Cable Row":["12 reps",4],"Leg Extension":["14 reps",2],"Cable External Rotation":["14 reps each side",2],"Incline Treadmill Walk":["25 minutes",1]},
+        2: {"Captain's Chair Knee Raise":["10 reps",4],"Barbell Romanian Deadlift":["8 reps",4],"Lat Pulldown":["12 reps",4],"Seated Leg Curl":["14 reps",3],"Neutral-Grip Dumbbell Incline Press":["10 reps",3],"Cable Face Pull":["15 reps",3],"Elliptical":["25 minutes",1]},
+        3: {"Side Plank Hip Raise":["10 reps each side",4],"Leg Press":["12 reps",4],"Assisted Pull-Up Machine":["8 reps",4],"Dumbbell Walking Lunge":["12 steps each leg",2],"Machine Shoulder Press":["10 reps",3],"Standing Calf Raise":["15 reps",4],"Incline Treadmill Walk":["26 minutes",1]},
+        4: {"Plank":["40 seconds",3],"Incline Push-Up":["12 reps",3],"Barbell Row":["10 reps",4],"Goblet Squat":["12 reps",4],"Cable Pallof Press":["12 reps each side",2],"Barbell Bicep Curl":["12 reps",3],"Rope Triceps Pushdown":["12 reps",3],"Stationary Bike":["15 minutes",1]},
+        5: {"Easy Swim":["600 meters or 24 minutes",1]}
+      },
+      4: {
+        1: {"Cable Crunch":["18 reps",4],"Machine Chest Press":["11 reps",4],"Barbell Squat":["9 reps",4],"Seated Cable Row":["13 reps",4],"Leg Extension":["15 reps",3],"Cable External Rotation":["15 reps each side",2],"Incline Treadmill Walk":["28 minutes",1]},
+        2: {"Bodyweight Back Extension":"15 reps","Hip Hinge Drill":"15 reps","Shoulder Blade Squeezes":"15 reps","Captain's Chair Knee Raise":["12 reps",4],"Barbell Romanian Deadlift":["9 reps",4],"Lat Pulldown":["13 reps",4],"Seated Leg Curl":["15 reps",3],"Neutral-Grip Dumbbell Incline Press":["11 reps",3],"Cable Face Pull":["16 reps",3],"Elliptical":["28 minutes",1]},
+        3: {"Side Plank Hip Raise":["12 reps each side",4],"Leg Press":["13 reps",4],"Assisted Pull-Up Machine":["9 reps",4],"Dumbbell Walking Lunge":["14 steps each leg",2],"Machine Shoulder Press":["11 reps",3],"Standing Calf Raise":["16 reps",4],"Incline Treadmill Walk":["30 minutes",1]},
+        4: {"Plank":["45 seconds",3],"Incline Push-Up":["12 reps",4],"Barbell Row":["11 reps",4],"Goblet Squat":["13 reps",4],"Cable Pallof Press":["12 reps each side",3],"Barbell Bicep Curl":["13 reps",3],"Rope Triceps Pushdown":["13 reps",3],"Stationary Bike":["16 minutes",1]},
+        5: {"Easy Swim":["600 meters or 24 minutes",1]}
+      }
+    };
+
+    const reminderMessages = {
+      breakfast: [
+        "Breakfast check: build the day before the day starts freelancing.",
+        "Protein first, chaos later.",
+        "Senthil, coffee is not a balanced breakfast. Nice try.",
+        "Feed the engine. Today has reps to pay.",
+        "Breakfast now. Future gym-you will remember this kindness.",
+        "Tiny mission: eat like someone with a plan.",
+        "The fork is today's first piece of equipment.",
+        "Breakfast check. Don't make lunch do all the emotional labour.",
+        "Fuel up. Empty tanks make dramatic stories, not good workouts.",
+        "Start clean. Nothing heroic, just food."
+      ],
+      lunch: [
+        "Lunch check. You cannot PR on vibes alone.",
+        "Future gym-you is quietly asking for protein.",
+        "Eat now so 5 PM doesn't become a courtroom drama.",
+        "Lunch is not optional DLC.",
+        "Refuel. The dumbbells are already plotting.",
+        "Good lunch, better session. Simple maths.",
+        "Senthil, don't let hunger manage your personality.",
+        "Midday fuel. Keep the machine civilised.",
+        "Lunch time: boring consistency, excellent results.",
+        "Eat like someone who has evening plans with iron."
+      ],
+      gym: [
+        "Gym window is open. Go lift, leave proud.",
+        "The weights are not going to move themselves. Tragic, but true.",
+        "Show up. The hard part loses power after the first set.",
+        "Today only asks for controlled reps, not hero nonsense.",
+        "Go collect your confidence one set at a time.",
+        "The couch made a strong case. Overruled.",
+        "Gym time. Become mildly inconvenient to your old limits.",
+        "No max effort needed. Just honest reps.",
+        "Senthil, your future shoulders requested controlled form.",
+        "Small session, big vote for the person you're becoming.",
+        "Go train. Motivation can catch up in the parking lot.",
+        "Your plan is ready. Your excuses need better funding.",
+        "Two or three reps in reserve. Zero drama required.",
+        "Move first, negotiate later.",
+        "Lift the thing. Log the thing. Become the thing."
+      ],
+      dinner: [
+        "Dinner check. Recovery is where the quiet gains clock in.",
+        "Feed the repair crew.",
+        "Muscles do not grow on suspense.",
+        "Dinner time. Crisps and optimism are not a strategy.",
+        "Recovery meal now, smug tomorrow.",
+        "You trained the body. Now maintain the machinery.",
+        "End the day like someone who respects tomorrow.",
+        "Dinner is part of the plan, not a side quest.",
+        "Hydrate and eat. The basics are undefeated.",
+        "Post-day fuel. Keep it simple, keep it moving."
+      ]
+    };
+
+    const state = {
+      screen: "home",
+      week: null,
+      day: null,
+      stack: [],
+      data: JSON.parse(localStorage.getItem("sg-data") || "{}")
+    };
+    if (!state.data.workouts) state.data.workouts = {};
+    if (!state.data.food) state.data.food = {};
+    if (!state.data.settings) state.data.settings = { unit: "kg", reminders: { breakfast: true, lunch: true, gym: true, dinner: true } };
+
+    function ex(name, target, sets, rest, trackWeight, type, note, video) {
+      return { name, target, sets, rest, trackWeight, type, note, video: YT(video), kind: "exercise" };
+    }
+    function cardio(name, target, note, video) {
+      return { name, target, sets: 1, rest: "none", trackWeight: false, type: "cardio", note, video: YT(video), kind: "cardio" };
+    }
+    function planDay(week, dayNo) {
+      const day = structuredClone(baseDays.find(d => d.day === dayNo));
+      day.week = week;
+      const diff = changes[week]?.[dayNo] || {};
+      day.warmup = day.warmup.map(line => {
+        const key = Object.keys(diff).find(k => line.startsWith(k));
+        return key ? `${key} - ${diff[key]}` : line;
+      });
+      day.items.forEach(item => {
+        const next = diff[item.name];
+        if (Array.isArray(next)) { item.target = next[0]; item.sets = next[1]; }
+      });
+      if (week >= 3 && dayNo <= 4) {
+        day.warmup = day.warmup.map(line => line.replace(/10/g, week === 4 ? "15" : "12"));
+      }
+      day.progression = weekNotes[week];
+      return day;
+    }
+    function workoutKey(w, d) { return `w${w}d${d}`; }
+    function itemKey(item) { return item.name.toLowerCase().replace(/[^a-z0-9]+/g, "-"); }
+    function todayKey() { return new Date().toLocaleDateString("en-CA"); }
+    function save() { localStorage.setItem("sg-data", JSON.stringify(state.data)); }
+    function qs(id) { return document.getElementById(id); }
+
+    function navigate(screen, opts = {}) {
+      if (screen !== state.screen) state.stack.push({ screen: state.screen, week: state.week, day: state.day });
+      state.screen = screen;
+      if ("week" in opts) state.week = opts.week;
+      if ("day" in opts) state.day = opts.day;
+      render();
+    }
+    qs("backBtn").onclick = () => {
+      const prev = state.stack.pop();
+      if (!prev) return;
+      Object.assign(state, prev);
+      render();
+    };
+    document.querySelectorAll(".tab").forEach(btn => btn.onclick = () => {
+      state.stack = [];
+      state.screen = btn.dataset.tab;
+      state.week = null;
+      state.day = null;
+      render();
+    });
+
+    function render() {
+      document.querySelectorAll(".screen").forEach(s => s.classList.toggle("active", s.id === state.screen));
+      document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.dataset.tab === state.screen));
+      qs("backBtn").hidden = state.stack.length === 0;
+      qs("home").innerHTML = homeHTML();
+      qs("workout").innerHTML = workoutHTML();
+      qs("food").innerHTML = foodHTML();
+      qs("export").innerHTML = exportHTML();
+      qs("settings").innerHTML = settingsHTML();
+      bind();
+    }
+
+    function completedStats(w, d) {
+      const day = planDay(w, d);
+      const saved = state.data.workouts[workoutKey(w, d)] || {};
+      let total = 0, done = 0;
+      day.items.forEach(item => {
+        total += item.kind === "cardio" ? 1 : item.sets;
+        const rec = saved[itemKey(item)] || {};
+        if (item.kind === "cardio") done += rec.done ? 1 : 0;
+        else for (let i = 0; i < item.sets; i++) if (rec.sets?.[i]?.done) done++;
+      });
+      return { total, done, pct: total ? Math.round(done / total * 100) : 0 };
+    }
+
+    function homeHTML() {
+      const latest = findLatest();
+      return `<div class="stack">
+        <button class="tile primary" data-go="workout"><strong>Workout Plan</strong><span>Weeks 1-4, gym days not calendar days</span></button>
+        <div class="grid">
+          <button class="tile" data-go="food"><strong>Food Tracker</strong><span>Breakfast, lunch, pre-workout, dinner</span></button>
+          <button class="tile" data-go="export"><strong>Export Data</strong><span>CSV and JSON for analysis later</span></button>
+        </div>
+        <div class="card">
+          <span class="pill">Continue</span>
+          <h2>${latest ? `Week ${latest.week}, Gym Day ${latest.day}` : "Start Week 1, Gym Day 1"}</h2>
+          <p class="muted">${latest ? latest.label : "No pressure. Just pick the next gym day when you're ready."}</p>
+          <div style="height:10px"></div>
+          <button class="action primary" data-open-day="${latest ? `${latest.week},${latest.day}` : "1,1"}">Open Workout</button>
+        </div>
+        <div class="card"><h3>V1 Focus</h3><p class="muted">Quick set ticks, per-set weights, simple meal ticks, calm sequence days, and exportable data.</p></div>
+      </div>`;
+    }
+
+    function workoutHTML() {
+      if (!state.week) {
+        return `<div class="stack">
+          <div class="section-title"><h2>Workout Plan</h2><span class="pill">4 weeks</span></div>
+          <div class="grid">${[1,2,3,4].map(w => `<button class="tile" data-week="${w}"><strong>Week ${w}</strong><span>${weekNotes[w]}</span></button>`).join("")}</div>
+        </div>`;
+      }
+      if (!state.day) {
+        return `<div class="stack">
+          <div class="section-title"><h2>Week ${state.week}</h2><span class="pill">Gym sequence</span></div>
+          <div class="card"><p class="muted">${weekNotes[state.week]}</p></div>
+          <div class="grid">${[1,2,3,4,5,6,7].map(d => {
+            const day = planDay(state.week, d), st = completedStats(state.week, d);
+            return `<button class="tile" data-day="${d}"><strong>Gym Day ${d}</strong><span>${day.focus}</span><div class="progress"><i style="width:${st.pct}%"></i></div></button>`;
+          }).join("")}</div>
+        </div>`;
+      }
+      const day = planDay(state.week, state.day);
+      if (!day.items.length) return `<div class="stack"><h2>Week ${state.week} / Gym Day ${state.day}</h2><div class="card"><h3>${day.focus}</h3><p class="muted">Nothing to tick. Rest, recover, and continue with the next gym day when ready.</p></div></div>`;
+      const saved = state.data.workouts[workoutKey(state.week, state.day)] || {};
+      return `<div class="stack">
+        <div class="section-title"><div><h2>Week ${state.week} / Gym Day ${state.day}</h2><p class="muted">${day.focus}</p></div><span class="pill">${completedStats(state.week,state.day).pct}%</span></div>
+        <div class="card"><h3>Warm-up</h3><ul class="list-only">${day.warmup.map(x => `<li>${x}</li>`).join("") || "<li>Ease in and keep it comfortable.</li>"}</ul></div>
+        ${day.items.map(item => itemHTML(day, item, saved[itemKey(item)] || {})).join("")}
+        <div class="card"><h3>Optional Cooldown</h3><ul class="list-only">${day.cooldown.map(x => `<li>${x}</li>`).join("") || "<li>Easy breathing and light recovery.</li>"}</ul></div>
+        <div class="card"><h3>Day Notes</h3><textarea data-note="${workoutKey(state.week,state.day)}" placeholder="Anything useful from today...">${saved.dayNote || ""}</textarea></div>
+      </div>`;
+    }
+
+    function itemHTML(day, item, rec) {
+      const key = `${workoutKey(day.week, day.day)}|${itemKey(item)}`;
+      if (item.kind === "cardio") {
+        return `<div class="exercise"><div class="exercise-head"><div><h3>${item.name}</h3><p class="muted">Target: ${item.target}</p></div><a class="demo" href="${item.video}" target="_blank" rel="noreferrer">Watch Demo</a></div>
+          <p class="mini">${item.note}</p>
+          <div class="set-row"><button class="check ${rec.done ? "done" : ""}" data-cardio="${key}">${rec.done ? "✓" : ""}</button><input data-cardio-note="${key}" value="${rec.note || ""}" placeholder="Type time / incline / resistance"></div>
+        </div>`;
+      }
+      return `<div class="exercise"><div class="exercise-head"><div><h3>${item.name}</h3><p class="muted">${item.target} x ${item.sets} · Rest ${item.rest}</p></div><a class="demo" href="${item.video}" target="_blank" rel="noreferrer">Watch Demo</a></div>
+        <p class="mini">${item.note}</p>
+        <div class="sets">${Array.from({ length: item.sets }, (_, i) => {
+          const set = rec.sets?.[i] || {};
+          return `<div class="set-row"><button class="check ${set.done ? "done" : ""}" data-set="${key}|${i}">${set.done ? "✓" : ""}</button>${item.trackWeight ? `<input data-weight="${key}|${i}" value="${set.weight || ""}" placeholder="Set ${i+1} weight (${state.data.settings.unit})">` : `<span class="mini">Set ${i+1}</span>`}</div>`;
+        }).join("")}</div></div>`;
+    }
+
+    function foodHTML() {
+      const k = todayKey();
+      const food = state.data.food[k] || {};
+      return `<div class="stack"><div class="section-title"><h2>Food Tracker</h2><span class="pill">${k}</span></div>
+        ${["Breakfast","Lunch","Pre-workout","Dinner"].map(meal => {
+          const id = meal.toLowerCase().replace(/[^a-z]+/g,"");
+          return `<div class="meal"><strong>${meal}</strong><button class="check ${food[id] ? "done" : ""}" data-meal="${id}">${food[id] ? "✓" : ""}</button></div>`;
+        }).join("")}
+        <div class="card"><h3>Food Notes</h3><textarea data-food-note="${k}" placeholder="Optional note for today...">${food.note || ""}</textarea></div>
+      </div>`;
+    }
+
+    function exportHTML() {
+      return `<div class="stack"><div class="section-title"><h2>Export Data</h2><span class="pill">Analysis ready</span></div>
+        <button class="tile primary" data-export="json"><strong>Export JSON</strong><span>Best for future apps, servers, and full history</span></button>
+        <button class="tile" data-export="csv"><strong>Export CSV</strong><span>Best for Excel, Sheets, and quick analysis</span></button>
+        <div class="card"><h3>Includes</h3><p class="muted">Plan position, real timestamps, set ticks, weights, cardio notes, gym day notes, and food ticks by calendar date.</p></div>
+      </div>`;
+    }
+
+    function settingsHTML() {
+      return `<div class="stack"><div class="section-title"><h2>More</h2><span class="pill">Settings</span></div>
+        <button class="tile" data-go="export"><strong>Export Data</strong><span>Save your history before major changes</span></button>
+        <div class="setting-row"><div class="switchline"><strong>Weight unit</strong><input data-unit value="${state.data.settings.unit}" style="max-width:90px"></div></div>
+        <div class="card"><h3>Reminder Message Bank</h3><p class="muted">V1 includes rotating breakfast, lunch, gym, and dinner lines. Browser push reminders need a server or installed PWA push setup, so this first version stores the message bank and settings for the next step.</p></div>
+        <button class="tile danger" data-clear-start><strong>Protected Clear</strong><span>Requires typing DELETE on the next prompt</span></button>
+      </div>`;
+    }
+
+    function bind() {
+      document.querySelectorAll("[data-go]").forEach(b => b.onclick = () => navigate(b.dataset.go));
+      document.querySelectorAll("[data-week]").forEach(b => b.onclick = () => navigate("workout", { week: Number(b.dataset.week), day: null }));
+      document.querySelectorAll("[data-day]").forEach(b => navigateOnClick(b, () => navigate("workout", { week: state.week, day: Number(b.dataset.day) })));
+      document.querySelectorAll("[data-open-day]").forEach(b => b.onclick = () => { const [w,d] = b.dataset.openDay.split(",").map(Number); navigate("workout", { week: w, day: d }); });
+      document.querySelectorAll("[data-set]").forEach(b => b.onclick = () => toggleSet(b.dataset.set));
+      document.querySelectorAll("[data-weight]").forEach(i => i.oninput = () => updateWeight(i.dataset.weight, i.value));
+      document.querySelectorAll("[data-cardio]").forEach(b => b.onclick = () => toggleCardio(b.dataset.cardio));
+      document.querySelectorAll("[data-cardio-note]").forEach(i => i.oninput = () => updateCardioNote(i.dataset.cardioNote, i.value));
+      document.querySelectorAll("[data-note]").forEach(t => t.oninput = () => { ensureWorkout(t.dataset.note).dayNote = t.value; ensureWorkout(t.dataset.note).updatedAt = new Date().toISOString(); save(); });
+      document.querySelectorAll("[data-meal]").forEach(b => b.onclick = () => toggleMeal(b.dataset.meal));
+      document.querySelectorAll("[data-food-note]").forEach(t => t.oninput = () => { ensureFood(t.dataset.foodNote).note = t.value; save(); });
+      document.querySelectorAll("[data-export]").forEach(b => b.onclick = () => exportData(b.dataset.export));
+      document.querySelectorAll("[data-unit]").forEach(i => i.oninput = () => { state.data.settings.unit = i.value || "kg"; save(); });
+      document.querySelectorAll("[data-clear-start]").forEach(b => b.onclick = protectedClear);
+    }
+    function navigateOnClick(el, fn) { el.onclick = fn; }
+    function ensureWorkout(key) { return state.data.workouts[key] ||= { startedAt: new Date().toISOString(), updatedAt: new Date().toISOString() }; }
+    function ensureFood(key) { return state.data.food[key] ||= {}; }
+    function parseKey(raw) {
+      const [wd, item, set] = raw.split("|");
+      const rec = ensureWorkout(wd);
+      rec[item] ||= {};
+      return { wd, item, set: Number(set), rec, itemRec: rec[item] };
+    }
+    function toggleSet(raw) {
+      const x = parseKey(raw);
+      x.itemRec.sets ||= [];
+      x.itemRec.sets[x.set] ||= {};
+      x.itemRec.sets[x.set].done = !x.itemRec.sets[x.set].done;
+      x.rec.updatedAt = new Date().toISOString();
+      save(); render();
+    }
+    function updateWeight(raw, value) {
+      const x = parseKey(raw);
+      x.itemRec.sets ||= [];
+      x.itemRec.sets[x.set] ||= {};
+      x.itemRec.sets[x.set].weight = value;
+      x.rec.updatedAt = new Date().toISOString();
+      save();
+    }
+    function toggleCardio(raw) {
+      const x = parseKey(raw + "|0");
+      x.itemRec.done = !x.itemRec.done;
+      x.rec.updatedAt = new Date().toISOString();
+      save(); render();
+    }
+    function updateCardioNote(raw, value) {
+      const x = parseKey(raw + "|0");
+      x.itemRec.note = value;
+      x.rec.updatedAt = new Date().toISOString();
+      save();
+    }
+    function toggleMeal(id) {
+      const f = ensureFood(todayKey());
+      f[id] = !f[id];
+      f.updatedAt = new Date().toISOString();
+      save(); render();
+    }
+    function findLatest() {
+      const keys = Object.entries(state.data.workouts);
+      if (!keys.length) return null;
+      keys.sort((a,b) => String(b[1].updatedAt || "").localeCompare(String(a[1].updatedAt || "")));
+      const m = keys[0][0].match(/w(\d)d(\d)/);
+      if (!m) return null;
+      return { week: Number(m[1]), day: Number(m[2]), label: `Last touched ${new Date(keys[0][1].updatedAt || keys[0][1].startedAt).toLocaleString()}` };
+    }
+    function exportRows() {
+      const rows = [];
+      for (let w=1; w<=4; w++) for (let d=1; d<=7; d++) {
+        const day = planDay(w,d), saved = state.data.workouts[workoutKey(w,d)] || {};
+        day.items.forEach(item => {
+          const rec = saved[itemKey(item)] || {};
+          if (item.kind === "cardio") rows.push({ type:"workout", week:w, gymDay:d, focus:day.focus, exercise:item.name, set:"cardio", target:item.target, completed:!!rec.done, weight:"", note:rec.note||"", updatedAt:saved.updatedAt||"" });
+          else for (let i=0; i<item.sets; i++) rows.push({ type:"workout", week:w, gymDay:d, focus:day.focus, exercise:item.name, set:i+1, target:item.target, completed:!!rec.sets?.[i]?.done, weight:rec.sets?.[i]?.weight||"", note:saved.dayNote||"", updatedAt:saved.updatedAt||"" });
+        });
+      }
+      Object.entries(state.data.food).forEach(([date, f]) => rows.push({ type:"food", date, breakfast:!!f.breakfast, lunch:!!f.lunch, preworkout:!!f.preworkout, dinner:!!f.dinner, note:f.note||"", updatedAt:f.updatedAt||"" }));
+      return rows;
+    }
+    function exportData(kind) {
+      const payload = kind === "json" ? JSON.stringify({ app:"Senthil Gym", exportedAt:new Date().toISOString(), data: state.data, rows: exportRows() }, null, 2) : toCSV(exportRows());
+      const blob = new Blob([payload], { type: kind === "json" ? "application/json" : "text/csv" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url; a.download = `senthil-gym-${new Date().toISOString().slice(0,10)}.${kind}`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+    function toCSV(rows) {
+      const heads = [...new Set(rows.flatMap(r => Object.keys(r)))];
+      return [heads.join(","), ...rows.map(r => heads.map(h => `"${String(r[h] ?? "").replaceAll('"','""')}"`).join(","))].join("\n");
+    }
+    function protectedClear() {
+      const answer = prompt("Type DELETE to clear local Senthil Gym data. Export first if you need a backup.");
+      if (answer === "DELETE") {
+        localStorage.removeItem("sg-data");
+        location.reload();
+      }
+    }
+    render();
+    if ("serviceWorker" in navigator) navigator.serviceWorker.register("service-worker.js").catch(() => {});
+  </script>
+</body>
+</html>
