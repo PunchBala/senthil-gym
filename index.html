@@ -106,6 +106,7 @@
       <section id="home" class="screen active"></section>
       <section id="workout" class="screen"></section>
       <section id="food" class="screen"></section>
+      <section id="stretches" class="screen"></section>
       <section id="export" class="screen"></section>
       <section id="settings" class="screen"></section>
     </main>
@@ -276,6 +277,48 @@
       ]
     };
 
+    const stretchLibrary = [
+      group("Chest", "Open the front of the shoulders and chest after pressing.", [
+        stretch("Doorway Chest Stretch", "30-45 seconds each side", "Keep the shoulder relaxed and avoid pushing into pain.", "doorway chest stretch proper form short"),
+        stretch("Pec Minor Wall Stretch", "30 seconds each side", "Use a gentle angle and keep breathing slow.", "pec minor wall stretch proper form short")
+      ]),
+      group("Shoulders", "Gentle support for shoulder-safe pressing and pulling.", [
+        stretch("Cross-Body Shoulder Stretch", "30 seconds each side", "Pull gently across the body without shrugging.", "cross body shoulder stretch proper form short"),
+        stretch("Sleeper Stretch", "20-30 seconds each side", "Keep this mild and stop if the shoulder feels pinchy.", "sleeper stretch shoulder proper form short"),
+        stretch("Child's Pose Lat Reach", "45 seconds", "Reach long through the arms and breathe into the upper back.", "childs pose lat stretch proper form short")
+      ]),
+      group("Back + Lats", "Useful after rows, pulldowns, and long seated days.", [
+        stretch("Kneeling Lat Stretch", "30-45 seconds each side", "Sit hips back and avoid forcing the shoulder.", "kneeling lat stretch proper form short"),
+        stretch("Cat-Cow", "8-10 slow reps", "Move smoothly through the spine.", "cat cow stretch proper form short"),
+        stretch("Thread the Needle", "30 seconds each side", "Rotate gently and keep the neck relaxed.", "thread the needle stretch proper form short")
+      ]),
+      group("Hip Flexors", "Good after treadmill, bike, squats, and desk time.", [
+        stretch("Half-Kneeling Hip Flexor Stretch", "30-45 seconds each side", "Keep ribs down and squeeze the back-leg glute.", "half kneeling hip flexor stretch proper form short"),
+        stretch("Couch Stretch", "20-40 seconds each side", "Start easy; this one gets spicy fast.", "couch stretch proper form beginner short")
+      ]),
+      group("Hamstrings", "Support hinge work, deadlifts, and general lower-body mobility.", [
+        stretch("Hamstring Stretch", "30-45 seconds each side", "Keep it mild and avoid bouncing.", "hamstring stretch proper form short"),
+        stretch("Dynamic Hamstring Sweep", "8-10 reps each side", "Use this before training as a moving stretch.", "hamstring sweep dynamic stretch proper form short")
+      ]),
+      group("Quads", "Useful after squats, lunges, leg press, and bike work.", [
+        stretch("Standing Quad Stretch", "30-45 seconds each side", "Stand tall and avoid yanking the leg.", "standing quad stretch proper form short"),
+        stretch("Side-Lying Quad Stretch", "30 seconds each side", "Keep hips stacked and pull gently.", "side lying quad stretch proper form short")
+      ]),
+      group("Glutes", "Helpful after squats, lunges, leg press, and long sitting.", [
+        stretch("Figure-4 Glute Stretch", "30-45 seconds each side", "Keep the stretch comfortable and breathe slowly.", "figure four glute stretch proper form short"),
+        stretch("Pigeon Stretch", "20-40 seconds each side", "Use a gentle version and avoid knee discomfort.", "pigeon stretch beginner proper form short")
+      ]),
+      group("Calves + Ankles", "Support treadmill walking, squats, lunges, and general ankle range.", [
+        stretch("Standing Calf Stretch", "30-45 seconds each side", "Keep the back heel down.", "standing calf stretch proper form short"),
+        stretch("Soleus Wall Stretch", "30 seconds each side", "Bend the back knee to target the lower calf.", "soleus stretch wall proper form short"),
+        stretch("Ankle Rocks", "10 reps each side", "Move slowly and keep the heel planted.", "ankle mobility rocks proper form short")
+      ]),
+      group("Neck + Traps", "Good for post-workout tension and desk posture.", [
+        stretch("Upper Trap Stretch", "20-30 seconds each side", "Stretch gently without pulling hard on the neck.", "upper trap stretch proper form short"),
+        stretch("Levator Scapulae Stretch", "20-30 seconds each side", "Look toward the armpit and keep the shoulder relaxed.", "levator scapulae stretch proper form short")
+      ])
+    ];
+
     const state = {
       screen: "home",
       week: null,
@@ -292,6 +335,12 @@
     }
     function cardio(name, target, note, video) {
       return { name, target, sets: 1, rest: "none", trackWeight: false, type: "cardio", note, video: YT(video), kind: "cardio" };
+    }
+    function group(name, note, items) {
+      return { name, note, items };
+    }
+    function stretch(name, target, note, video) {
+      return { name, target, note, video: YT(video) };
     }
     function planDay(week, dayNo) {
       const day = structuredClone(baseDays.find(d => d.day === dayNo));
@@ -345,6 +394,7 @@
       qs("home").innerHTML = homeHTML();
       qs("workout").innerHTML = workoutHTML();
       qs("food").innerHTML = foodHTML();
+      qs("stretches").innerHTML = stretchesHTML();
       qs("export").innerHTML = exportHTML();
       qs("settings").innerHTML = settingsHTML();
       bind();
@@ -369,6 +419,7 @@
         <button class="tile primary" data-go="workout"><strong>Workout Plan</strong><span>Weeks 1-4, gym days not calendar days</span></button>
         <div class="grid">
           <button class="tile" data-go="food"><strong>Food Tracker</strong><span>Breakfast, lunch, pre-workout, dinner</span></button>
+          <button class="tile" data-go="stretches"><strong>Stretch Library</strong><span>Demo support by muscle group</span></button>
           <button class="tile" data-go="export"><strong>Export Data</strong><span>CSV and JSON for analysis later</span></button>
         </div>
         <div class="card">
@@ -379,6 +430,24 @@
           <button class="action primary" data-open-day="${latest ? `${latest.week},${latest.day}` : "1,1"}">Open Workout</button>
         </div>
         <div class="card"><h3>V1 Focus</h3><p class="muted">Quick set ticks, per-set weights, simple meal ticks, calm sequence days, and exportable data.</p></div>
+      </div>`;
+    }
+
+    function stretchesHTML() {
+      return `<div class="stack">
+        <div class="section-title"><div><h2>Stretch Library</h2><p class="muted">Reference support by muscle group. Use what you need.</p></div><span class="pill">Demos</span></div>
+        ${stretchLibrary.map(group => `<div class="card">
+          <h3>${group.name}</h3>
+          <p class="muted">${group.note}</p>
+          <div style="height:10px"></div>
+          <div class="stack">${group.items.map(item => `<div class="exercise">
+            <div class="exercise-head">
+              <div><h3>${item.name}</h3><p class="muted">${item.target}</p></div>
+              <a class="demo" href="${item.video}" target="_blank" rel="noreferrer">Watch Demo</a>
+            </div>
+            <p class="mini">${item.note}</p>
+          </div>`).join("")}</div>
+        </div>`).join("")}
       </div>`;
     }
 
@@ -450,6 +519,7 @@
     function settingsHTML() {
       return `<div class="stack"><div class="section-title"><h2>More</h2><span class="pill">Settings</span></div>
         <button class="tile" data-go="export"><strong>Export Data</strong><span>Save your history before major changes</span></button>
+        <button class="tile" data-go="stretches"><strong>Stretch Library</strong><span>Demo support by muscle group</span></button>
         <div class="setting-row"><div class="switchline"><strong>Weight unit</strong><input data-unit value="${state.data.settings.unit}" style="max-width:90px"></div></div>
         <div class="card"><h3>Reminder Message Bank</h3><p class="muted">V1 includes rotating breakfast, lunch, gym, and dinner lines. Browser push reminders need a server or installed PWA push setup, so this first version stores the message bank and settings for the next step.</p></div>
         <button class="tile danger" data-clear-start><strong>Protected Clear</strong><span>Requires typing DELETE on the next prompt</span></button>
