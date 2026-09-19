@@ -67,6 +67,10 @@
     .exercise-head { display: flex; justify-content: space-between; align-items: start; gap: 10px; }
     .demo { border: 1px solid rgba(255,191,63,.35); background: rgba(255,191,63,.08); color: var(--gold); text-decoration: none; border-radius: 8px; padding: 7px 9px; font-size: 12px; white-space: nowrap; }
     .sets { display: grid; gap: 8px; }
+    .weight-bests { display: grid; gap: 8px; padding: 10px; background: #0e0e0e; border: 1px solid var(--line); border-radius: 8px; }
+    .best-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+    .best-grid strong { display: block; font-size: 15px; margin-top: 4px; overflow-wrap: anywhere; }
+    .best-up { color: var(--green); }
     .set-row { display: grid; grid-template-columns: 38px 1fr; align-items: center; gap: 8px; }
     .check { width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--line); background: #202020; display: grid; place-items: center; font-weight: 900; }
     .check.done { background: var(--green); color: #04120c; border-color: var(--green); }
@@ -362,6 +366,48 @@
     }
     function workoutKey(w, d) { return `w${w}d${d}`; }
     function itemKey(item) { return item.name.toLowerCase().replace(/[^a-z0-9]+/g, "-"); }
+    function weightNumber(value) {
+      if (typeof value !== "string" && typeof value !== "number") return null;
+      const text = String(value).trim();
+      if (!/^\d+(?:\.\d+)?$/.test(text)) return null;
+      const number = Number(text);
+      return Number.isFinite(number) && number >= 0 ? number : null;
+    }
+    function exerciseBests(item, week) {
+      const assisted = item.name === "Assisted Pull-Up Machine";
+      const entries = [];
+      Object.entries(state.data.workouts).forEach(([key, workout]) => {
+        const match = /^w(\d+)d(\d+)$/.exec(key);
+        if (!match) return;
+        (workout[itemKey(item)]?.sets || []).forEach(set => {
+          const weight = weightNumber(set?.weight);
+          if (weight !== null) entries.push({ week: Number(match[1]), weight });
+        });
+      });
+      const best = rows => rows.length ? rows.reduce((value, row) => assisted ? Math.min(value, row.weight) : Math.max(value, row.weight), rows[0].weight) : null;
+      return { assisted, current: best(entries.filter(row => row.week === week)), previous: best(entries.filter(row => row.week === week - 1)), allTime: best(entries), earlier: best(entries.filter(row => row.week < week)) };
+    }
+    function weightBestsHTML(item, week) {
+      const best = exerciseBests(item, week);
+      const unit = String(state.data.settings.unit).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+      const number = value => Number(value.toFixed(2)).toLocaleString("en-GB", { maximumFractionDigits: 2 });
+      const value = weight => weight === null ? "No record" : `${number(weight)} ${unit}`;
+      let comparison = week === 1 ? "No previous plan week to compare." : "No weight recorded in the previous week.";
+      let improved = false;
+      if (best.previous !== null) {
+        if (best.current === null) comparison = "Log a weight to compare with last week.";
+        else {
+          const delta = best.current - best.previous;
+          improved = best.assisted ? delta < 0 : delta > 0;
+          comparison = delta === 0 ? "Same best as last week." : `${delta > 0 ? "+" : "−"}${number(Math.abs(delta))} ${unit} ${best.assisted ? "assistance " : ""}vs last week${improved ? " · Improving" : ""}.`;
+        }
+      }
+      const newBest = best.current !== null && best.earlier !== null && best.current === best.allTime && (best.assisted ? best.current < best.earlier : best.current > best.earlier);
+      return `<div class="best-grid"><div><span class="mini">This week</span><strong>${value(best.current)}</strong></div><div><span class="mini">Previous week</span><strong>${week === 1 ? "—" : value(best.previous)}</strong></div><div><span class="mini">All-time best</span><strong class="accent">${value(best.allTime)}</strong></div></div>
+        <p class="mini ${improved ? "best-up" : ""}">${comparison}</p>
+        ${newBest ? '<p class="mini best-up">New all-time best this week!</p>' : ""}
+        <p class="mini">${best.assisted ? "Lowest logged assistance; less is better." : "Highest logged set weight, including unticked sets."} Compares plan weeks; reps and form may differ.</p>`;
+    }
     function todayKey() { return new Date().toLocaleDateString("en-CA"); }
     function save() { localStorage.setItem("sg-data", JSON.stringify(state.data)); }
     function qs(id) { return document.getElementById(id); }
@@ -490,6 +536,7 @@
       }
       return `<div class="exercise"><div class="exercise-head"><div><h3>${item.name}</h3><p class="muted">${item.target} x ${item.sets} · Rest ${item.rest}</p></div><a class="demo" href="${item.video}" target="_blank" rel="noreferrer">Watch Demo</a></div>
         <p class="mini">${item.note}</p>
+        ${item.trackWeight ? `<div class="weight-bests" data-bests="${itemKey(item)}" aria-live="polite">${weightBestsHTML(item, day.week)}</div>` : ""}
         <div class="sets">${Array.from({ length: item.sets }, (_, i) => {
           const set = rec.sets?.[i] || {};
           return `<div class="set-row"><button class="check ${set.done ? "done" : ""}" data-set="${key}|${i}">${set.done ? "✓" : ""}</button>${item.trackWeight ? `<input data-weight="${key}|${i}" value="${set.weight || ""}" placeholder="Set ${i+1} weight (${state.data.settings.unit})">` : `<span class="mini">Set ${i+1}</span>`}</div>`;
@@ -566,6 +613,9 @@
       x.itemRec.sets[x.set].weight = value;
       x.rec.updatedAt = new Date().toISOString();
       save();
+      const exercise = baseDays.flatMap(day => day.items).find(item => itemKey(item) === x.item);
+      const panel = document.querySelector(`[data-bests="${x.item}"]`);
+      if (panel && exercise) panel.innerHTML = weightBestsHTML(exercise, state.week);
     }
     function toggleCardio(raw) {
       const x = parseKey(raw + "|0");
