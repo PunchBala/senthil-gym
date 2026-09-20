@@ -1,5 +1,5 @@
-const CACHE_NAME = "senthil-gym-v7";
-const ASSETS = ["./", "./index.html", "./manifest.json", "./icon.svg"];
+const CACHE_NAME = "senthil-gym-v8";
+const ASSETS = ["./", "./index.html", "./manifest.json", "./icon.svg", "./backup.mjs", "./backup-schema.mjs", "./github-backup.mjs"];
 
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS)));
@@ -16,6 +16,8 @@ self.addEventListener("activate", event => {
 });
 
 self.addEventListener("fetch", event => {
+  // Private backup responses must never enter the app's offline cache.
+  if (new URL(event.request.url).origin !== self.location.origin || event.request.headers.has('Authorization')) return;
   if (event.request.method !== "GET") return;
   if (event.request.mode === "navigate" && new URL(event.request.url).origin === self.location.origin) {
     event.respondWith(

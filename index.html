@@ -79,6 +79,8 @@
     .meal { display: grid; grid-template-columns: 1fr 44px; align-items: center; gap: 10px; padding: 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; }
     .actions { display: flex; gap: 8px; flex-wrap: wrap; }
     .action { border: 1px solid var(--line); background: var(--panel-2); border-radius: 8px; padding: 10px 12px; }
+    .action.primary { background: linear-gradient(135deg, var(--fire), #ff8a2a); }
+    button:disabled { opacity: .5; cursor: not-allowed; }
     .danger { border-color: rgba(248,113,113,.4); color: #fca5a5; }
     .setting-row { padding: 12px; display: grid; gap: 8px; }
     .switchline { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
@@ -409,7 +411,8 @@
         <p class="mini">${best.assisted ? "Lowest logged assistance; less is better." : "Highest logged set weight, including unticked sets."} Compares plan weeks; reps and form may differ.</p>`;
     }
     function todayKey() { return new Date().toLocaleDateString("en-CA"); }
-    function save() { localStorage.setItem("sg-data", JSON.stringify(state.data)); }
+    function save() { localStorage.setItem("sg-data", JSON.stringify(state.data)); globalThis.GymBackup?.changed(); }
+    function escapeHTML(value) { return String(value ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
     function qs(id) { return document.getElementById(id); }
 
     function navigate(screen, opts = {}) {
@@ -522,7 +525,7 @@
         <div class="card"><h3>Warm-up</h3><ul class="list-only">${day.warmup.map(x => `<li>${x}</li>`).join("") || "<li>Ease in and keep it comfortable.</li>"}</ul></div>
         ${day.items.map(item => itemHTML(day, item, saved[itemKey(item)] || {})).join("")}
         <div class="card"><h3>Optional Cooldown</h3><ul class="list-only">${day.cooldown.map(x => `<li>${x}</li>`).join("") || "<li>Easy breathing and light recovery.</li>"}</ul></div>
-        <div class="card"><h3>Day Notes</h3><textarea data-note="${workoutKey(state.week,state.day)}" placeholder="Anything useful from today...">${saved.dayNote || ""}</textarea></div>
+        <div class="card"><h3>Day Notes</h3><textarea data-note="${workoutKey(state.week,state.day)}" placeholder="Anything useful from today...">${escapeHTML(saved.dayNote || "")}</textarea></div>
       </div>`;
     }
 
@@ -531,7 +534,7 @@
       if (item.kind === "cardio") {
         return `<div class="exercise"><div class="exercise-head"><div><h3>${item.name}</h3><p class="muted">Target: ${item.target}</p></div><a class="demo" href="${item.video}" target="_blank" rel="noreferrer">Watch Demo</a></div>
           <p class="mini">${item.note}</p>
-          <div class="set-row"><button class="check ${rec.done ? "done" : ""}" data-cardio="${key}">${rec.done ? "✓" : ""}</button><input data-cardio-note="${key}" value="${rec.note || ""}" placeholder="Type time / incline / resistance"></div>
+          <div class="set-row"><button class="check ${rec.done ? "done" : ""}" data-cardio="${key}">${rec.done ? "✓" : ""}</button><input data-cardio-note="${key}" value="${escapeHTML(rec.note || "")}" placeholder="Type time / incline / resistance"></div>
         </div>`;
       }
       return `<div class="exercise"><div class="exercise-head"><div><h3>${item.name}</h3><p class="muted">${item.target} x ${item.sets} · Rest ${item.rest}</p></div><a class="demo" href="${item.video}" target="_blank" rel="noreferrer">Watch Demo</a></div>
@@ -539,7 +542,7 @@
         ${item.trackWeight ? `<div class="weight-bests" data-bests="${itemKey(item)}" aria-live="polite">${weightBestsHTML(item, day.week)}</div>` : ""}
         <div class="sets">${Array.from({ length: item.sets }, (_, i) => {
           const set = rec.sets?.[i] || {};
-          return `<div class="set-row"><button class="check ${set.done ? "done" : ""}" data-set="${key}|${i}">${set.done ? "✓" : ""}</button>${item.trackWeight ? `<input data-weight="${key}|${i}" value="${set.weight || ""}" placeholder="Set ${i+1} weight (${state.data.settings.unit})">` : `<span class="mini">Set ${i+1}</span>`}</div>`;
+          return `<div class="set-row"><button class="check ${set.done ? "done" : ""}" data-set="${key}|${i}">${set.done ? "✓" : ""}</button>${item.trackWeight ? `<input data-weight="${key}|${i}" value="${escapeHTML(set.weight || "")}" placeholder="Set ${i+1} weight (${escapeHTML(state.data.settings.unit)})">` : `<span class="mini">Set ${i+1}</span>`}</div>`;
         }).join("")}</div></div>`;
     }
 
@@ -590,15 +593,17 @@
 
     function settingsHTML() {
       return `<div class="stack"><div class="section-title"><h2>More</h2><span class="pill">Settings</span></div>
+        ${globalThis.GymBackup?.panelHTML() || '<div class="card"><h3>GitHub backup</h3><p>Loading backup controls…</p></div>'}
         <button class="tile" data-go="export"><strong>Export Data</strong><span>Save your history before major changes</span></button>
         <button class="tile" data-go="stretches"><strong>Stretch Library</strong><span>Demo support by muscle group</span></button>
-        <div class="setting-row"><div class="switchline"><strong>Weight unit</strong><input data-unit value="${state.data.settings.unit}" style="max-width:90px"></div></div>
+        <div class="setting-row"><div class="switchline"><strong>Weight unit</strong><input data-unit value="${escapeHTML(state.data.settings.unit)}" style="max-width:90px"></div></div>
         <div class="card"><h3>Reminder Message Bank</h3><p class="muted">V1 includes rotating breakfast, lunch, gym, and dinner lines. Browser push reminders need a server or installed PWA push setup, so this first version stores the message bank and settings for the next step.</p></div>
         <button class="tile danger" data-clear-start><strong>Protected Clear</strong><span>Requires typing DELETE on the next prompt</span></button>
       </div>`;
     }
 
     function bind() {
+      globalThis.GymBackup?.bind();
       document.querySelectorAll("[data-go]").forEach(b => b.onclick = () => navigate(b.dataset.go));
       document.querySelectorAll("[data-week]").forEach(b => b.onclick = () => navigate("workout", { week: Number(b.dataset.week), day: null }));
       document.querySelectorAll("[data-day]").forEach(b => navigateOnClick(b, () => navigate("workout", { week: state.week, day: Number(b.dataset.day) })));
@@ -702,7 +707,9 @@
       }
     }
     render();
+    globalThis.gymBackupAdapter = { getData: () => state.data, render };
     if ("serviceWorker" in navigator) navigator.serviceWorker.register("service-worker.js").catch(() => {});
   </script>
+  <script type="module" src="./backup.mjs"></script>
 </body>
 </html>
