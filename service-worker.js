@@ -1,4 +1,4 @@
-const CACHE_NAME = "senthil-gym-v9";
+const CACHE_NAME = "senthil-gym-v10";
 const ASSETS = ["./", "./index.html", "./manifest.json", "./icon.svg", "./backup.mjs", "./backup-schema.mjs", "./github-backup.mjs"];
 
 self.addEventListener("install", event => {

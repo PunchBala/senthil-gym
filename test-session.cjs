@@ -1,0 +1,48 @@
+const fs = require('node:fs');
+const vm = require('node:vm');
+const assert = require('node:assert/strict');
+const source = fs.readFileSync('index.html','utf8').match(/<script>([\s\S]*?)<\/script>/)[1];
+let now = Date.now();
+class Clock extends Date { static now() { return now; } }
+const storage = new Map([['sg-data', JSON.stringify({planVersion:'adapted-8-week-v2',workouts:{},food:{},settings:{unit:'kg'}})]]);
+function app() {
+  const context = vm.createContext({Date:Clock,localStorage:{getItem:k=>storage.get(k)||null,setItem:(k,v)=>storage.set(k,v)},document:{getElementById:()=>({}),querySelectorAll:()=>[],querySelector:()=>null},navigator:{},structuredClone,setInterval:()=>1,clearInterval:()=>{}});
+  vm.runInContext(source,context);
+  return s=>vm.runInContext(s,context);
+}
+let run=app();
+assert.equal(run('restSeconds("45–60 seconds")'),60);
+assert.equal(run('restSeconds("1–2 minutes")'),120);
+assert.equal(run('restSeconds("none")'),0);
+run('state.week=1; state.day=1; toggleSet("w1d1|"+itemKey(planDay(1,1).items[0])+"|0")');
+assert.ok(run('restRemaining()')>0);
+const end=run('restState.end');
+run('toggleSet("w1d1|"+itemKey(planDay(1,1).items[0])+"|0")');
+assert.equal(run('restState.end'),end,'Unticking must not restart rest');
+run('addRest()');
+assert.equal(run('restState.end'),end+30000);
+now+=200000;
+run('tickRest()');
+assert.equal(run('restRemaining()'),0);
+assert.equal(run('restState.alerted'),true);
+run('startRest("90 seconds","Row")');
+now+=12000;
+run=app();
+assert.equal(run('restRemaining()'),78,'Refresh uses elapsed wall time');
+run('state.week=1; state.day=1; updateWeight("w1d1|row|0","42"); finishWorkout()');
+assert.equal(run('state.data.workouts.w1d1.row.sets[0].weight'),'42');
+assert.ok(run('state.data.workouts.w1d1.completedAt'));
+assert.equal(run('restState.end'),undefined);
+assert.equal(run('homeRecommendation().day'),3);
+assert.ok(run('finishSummaryHTML(1,1).includes("0 sets ticked")'));
+assert.ok(run('exportRows().some(r=>r.type==="session" && r.completedAt)'));
+assert.equal(run('nextSession(1,5).week'),2);
+assert.equal(run('nextSession(2,5).day'),1);
+assert.equal(run('nextSession(3,1).day'),2);
+assert.equal(run('nextSession(8,5)'),null);
+run('state.data.workouts.w1d3={completedAt:"2026-09-20"}');
+assert.equal(run('nextSession(1,1).day'),5);
+run('state.week=8; state.day=5; finishWorkout()');
+assert.ok(run('homeRecommendation().complete'));
+assert.ok(!run('homeHTML().includes("undefined")'));
+(async()=>{ const {validateData}=await import('./backup-schema.mjs'); validateData(JSON.parse(storage.get('sg-data'))); console.log('Passed: partial finish, next-session boundaries, exports/backup validation, untick, timer extension, elapsed time, refresh, expiry and finish cancellation.'); })().catch(e=>{console.error(e);process.exitCode=1;});

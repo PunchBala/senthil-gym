@@ -48,6 +48,9 @@
     .stack { display: grid; gap: 10px; }
     .card, .tile, .exercise, .setting-row { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); }
     .card { padding: 14px; }
+    .rest-active { position: fixed; bottom: calc(80px + env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); width: min(592px, calc(100% - 28px)); z-index: 20; box-shadow: 0 4px 24px #000; }
+    .rest-active .rest-hint { display: none; }
+    body:has(.screen.active .rest-active) main { padding-bottom: 290px; }
     .tile { min-height: 78px; padding: 14px; text-align: left; display: flex; flex-direction: column; justify-content: space-between; gap: 8px; cursor: pointer; }
     .tile strong { font-size: 17px; }
     .tile span, .muted { color: var(--muted); font-size: 13px; line-height: 1.35; }
@@ -1569,7 +1572,7 @@
     }
 
     function homeHTML() {
-      const latest = findLatest();
+      const latest = homeRecommendation();
       const archivedCount = Object.keys(state.data.previousPlanWorkouts || {}).length + Object.keys(state.data.sourcePlanWorkouts || {}).length;
       return `<div class="stack">
         <button class="tile primary" data-go="workout"><strong>8-week Workout Plan</strong><span>Weeks 1–8 · gradual return with shoulder adaptations</span></button>
@@ -1581,10 +1584,10 @@
         </div>
         <div class="card">
           <span class="pill">Continue</span>
-          <h2>${latest ? `Week ${latest.week}, Gym Day ${latest.day}` : "Start Week 1, Gym Day 1"}</h2>
+          <h2>${latest?.complete ? "Eight-week plan finished" : latest ? `Week ${latest.week}, Gym Day ${latest.day}` : "Start Week 1, Gym Day 1"}</h2>
           <p class="muted">${latest ? latest.label : "No pressure. Just pick the next gym day when you're ready."}</p>
           <div style="height:10px"></div>
-          <button class="action primary" data-open-day="${latest ? `${latest.week},${latest.day}` : "1,1"}">Open Workout</button>
+          ${latest?.complete ? '<button class="action" data-go="workout">Review plan</button>' : `<button class="action primary" data-open-day="${latest ? `${latest.week},${latest.day}` : "1,1"}">${latest?.next ? "Open next session" : "Open Workout"}</button>`}
         </div>
         <div class="card"><h3>Start with three sessions</h3><p class="muted">After months away, begin with sessions 1, 3 and 5 on non-consecutive days. Build toward the original five-session rhythm as recovery allows. Optional exercises do not count against your completion score.</p></div>
       </div>`;
@@ -1623,7 +1626,7 @@
           <div class="card"><p class="muted">${weekNotes[state.week]} If using all five sessions, a possible sequence is 1, 2, rest, 3, 4, 5, rest; easy activity can replace session 4 or be omitted. Extra sets and sessions are conditional, never compulsory.</p></div>
           <div class="grid">${[1,2,3,4,5,6,7].map(d => {
             const day = planDay(state.week, d), st = completedStats(state.week, d);
-            return `<button class="tile" data-day="${d}"><strong>Gym Day ${d}</strong><span>${day.focus}</span><div class="progress"><i style="width:${st.pct}%"></i></div></button>`;
+            return `<button class="tile" data-day="${d}"><strong>Gym Day ${d}${state.data.workouts[workoutKey(state.week,d)]?.completedAt ? " · Finished" : ""}</strong><span>${day.focus}</span><div class="progress"><i style="width:${st.pct}%"></i></div></button>`;
           }).join("")}</div>
         </div>`;
       }
@@ -1632,6 +1635,8 @@
       const saved = state.data.workouts[workoutKey(state.week, state.day)] || {};
       return `<div class="stack">
         <div class="section-title"><div><h2>Week ${state.week} / Gym Day ${state.day}</h2><p class="muted">${day.focus}</p></div><span class="pill">${completedStats(state.week,state.day).pct}%</span></div>
+        ${saved.completedAt ? finishSummaryHTML(state.week, state.day) : ""}
+        <div id="rest-panel" class="card ${restState.end ? "rest-active" : ""}" aria-label="Rest timer">${restHTML()}</div>
         <div class="card"><h3>Adapted session</h3><p class="muted">${day.adaptation}</p><p class="mini">${weekNotes[state.week]} If three sets are shown, staying at two is fine while rebuilding. Add weight only after all reps are comfortable on two separate sessions with no next-morning flare.</p></div>
         ${shoulderGuidanceHTML()}
         <details class="card"><summary>Original workbook reference</summary><p class="mini">${day.source}. Reference only; follow the adapted session below.</p><ul class="list-only">${originalDay(state.week,state.day).items.map(item => `<li>${item.name}: ${item.target}${item.kind === "exercise" ? ` × ${item.sets}; rest ${item.rest}` : ""}</li>`).join("")}</ul>${day.sourceRecovery ? `<p class="mini">${day.sourceRecovery}</p>` : ""}</details>
@@ -1640,6 +1645,7 @@
         ${day.items.map(item => itemHTML(day, item, saved[itemKey(item)] || {})).join("")}
         <div class="card"><h3>Optional Cooldown</h3><ul class="list-only">${day.cooldown.map(x => `<li>${x}</li>`).join("") || "<li>Not specified in the original workbook.</li>"}</ul></div>
         <div class="card"><h3>Day Notes</h3><textarea data-note="${workoutKey(state.week,state.day)}" placeholder="Anything useful from today...">${escapeHTML(saved.dayNote || "")}</textarea></div>
+        ${!saved.completedAt ? '<div class="card stack"><h3>Ready to finish?</h3><p class="muted">Save this session as finished, even if you skipped sets. Your ticks and weights stay exactly as logged.</p><button class="action primary" data-finish>Finish workout</button></div>' : ""}
       </div>`;
     }
 
@@ -1708,6 +1714,9 @@
     }
 
     function bind() {
+      bindRest();
+      document.querySelectorAll("[data-finish]").forEach(b => b.onclick = finishWorkout);
+      document.querySelectorAll("[data-reopen]").forEach(b => b.onclick = () => { const rec = ensureWorkout(workoutKey(state.week,state.day)); delete rec.completedAt; rec.updatedAt = new Date().toISOString(); save(); render(); });
       globalThis.GymBackup?.bind();
       document.querySelectorAll("[data-shoulder-recovery]").forEach(t => t.oninput = () => { state.data.shoulderRecovery = t.value; save(); });
       document.querySelectorAll("[data-go]").forEach(b => b.onclick = () => navigate(b.dataset.go));
@@ -1740,6 +1749,11 @@
       x.itemRec.sets[x.set] ||= {};
       x.itemRec.sets[x.set].done = !x.itemRec.sets[x.set].done;
       x.rec.updatedAt = new Date().toISOString();
+      if (x.itemRec.sets[x.set].done) {
+        const match = /^w([1-8])d([1-7])$/.exec(x.wd);
+        const exercise = planDay(Number(match[1]), Number(match[2])).items.find(item => itemKey(item) === x.item);
+        if (exercise) startRest(exercise.rest, exercise.name);
+      }
       save(); render();
     }
     function updateWeight(raw, value) {
@@ -1779,10 +1793,83 @@
       if (!m) return null;
       return { week: Number(m[1]), day: Number(m[2]), label: `Last touched ${new Date(keys[0][1].updatedAt || keys[0][1].startedAt).toLocaleString()}` };
     }
+    function nextSession(week, day) {
+      for (let w = week; w <= 8; w++) {
+        const sequence = w <= 2 ? [1,3,5] : [1,2,3,4,5];
+        for (const d of sequence) if ((w > week || d > day) && !state.data.workouts[workoutKey(w,d)]?.completedAt) return {week:w, day:d};
+      }
+      return null;
+    }
+    function homeRecommendation() {
+      const latest = findLatest();
+      if (!latest || !state.data.workouts[workoutKey(latest.week,latest.day)]?.completedAt) return latest;
+      const next = nextSession(latest.week,latest.day);
+      return next ? {...next, next:true, label:"Next planned session. Take rest days as needed; you can choose any session from the plan."} : {complete:true,label:"This is the end of the eight-week plan. Review your sessions and progress before planning another block."};
+    }
+    function finishSummaryHTML(w,d) {
+      const saved = state.data.workouts[workoutKey(w,d)] || {};
+      let sets = 0, exercises = 0, cardio = 0;
+      planDay(w,d).items.forEach(item => {
+        const rec = saved[itemKey(item)] || {};
+        const count = (rec.sets || []).filter(s => s?.done).length;
+        sets += count;
+        if (count || rec.done) exercises++;
+        if (item.kind === "cardio" && rec.done) cardio++;
+      });
+      const next = nextSession(w,d);
+      return `<div class="card stack"><h3>Workout finished</h3><p>${sets} sets ticked · ${exercises} exercises logged · ${cardio} cardio completed</p><p class="mini">Finished ${escapeHTML(new Date(saved.completedAt).toLocaleString())}. Unticked sets remain unticked.</p>${next ? `<button class="action primary" data-open-day="${next.week},${next.day}">Next: Week ${next.week}, Gym Day ${next.day}</button><p class="mini">Take rest days as needed. Optional sessions can be chosen from the plan.</p>` : '<p>End of the eight-week plan. Review your progress before starting another block.</p>'}<button class="action" data-reopen>Reopen workout</button></div>`;
+    }
+    function finishWorkout() {
+      const rec = ensureWorkout(workoutKey(state.week,state.day));
+      rec.completedAt ||= new Date().toISOString();
+      rec.updatedAt = new Date().toISOString();
+      stopRest(); save(); render();
+      if (typeof window !== "undefined") window.scrollTo({top:0,behavior:"smooth"});
+    }
+    let restState = {};
+    try { const stored = JSON.parse(localStorage.getItem("sg-rest") || "{}"); if (Number.isFinite(stored?.end)) restState = stored; } catch {}
+    let restInterval = null, restAudio = null;
+    function restSeconds(text) {
+      const values = String(text).match(/\d+(?:\.\d+)?/g);
+      return values ? Math.round(Math.max(...values.map(Number)) * (/min/i.test(text) ? 60 : 1)) : 0;
+    }
+    function restRemaining() { return Math.max(0, Math.ceil(((restState.end || 0) - Date.now()) / 1000)); }
+    function persistRest() { try { localStorage.setItem("sg-rest", JSON.stringify(restState)); } catch {} }
+    function startRest(text, name) {
+      const seconds = restSeconds(text);
+      if (!seconds) return;
+      restState = {end:Date.now()+seconds*1000, name, alerted:false};
+      persistRest();
+      try { const Audio = globalThis.AudioContext || globalThis.webkitAudioContext; if (Audio) { restAudio ||= new Audio(); restAudio.resume().catch(()=>{}); } } catch {}
+      if (!restInterval) restInterval = setInterval(tickRest, 250);
+    }
+    function stopRest() { restState = {}; persistRest(); if (restInterval) clearInterval(restInterval); restInterval = null; }
+    function restHTML() {
+      const remaining = restRemaining();
+      return `<div class="stack"><h3>Rest timer <span id="rest-time" role="timer">${restState.end ? `${Math.floor(remaining/60)}:${String(remaining%60).padStart(2,"0")}` : "Ready"}</span></h3><p class="mini" id="rest-label">${restState.end ? remaining ? escapeHTML(restState.name) : "Rest complete — continue when ready." : "Tick a set to start its prescribed rest. For a range, the longer time is used."}</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="action" data-rest-add ${restState.end ? "" : "disabled"}>+30 seconds</button><button class="action" data-rest-skip ${restState.end ? "" : "disabled"}>Skip</button><button class="action" data-rest-mute aria-pressed="${!!state.data.settings.restMuted}">${state.data.settings.restMuted ? "Unmute" : "Mute"}</button></div><p class="mini rest-hint">Sound works while the app is active; locked phones may silence it.</p></div>`;
+    }
+    function refreshRest() { const panel = qs("rest-panel"); if (panel) { panel.innerHTML = restHTML(); panel.classList?.toggle("rest-active",!!restState.end); bindRest(); } }
+    function addRest() { restState.end = Math.max(Date.now(),restState.end || 0)+30000; restState.alerted=false; persistRest(); if (!restInterval) restInterval=setInterval(tickRest,250); refreshRest(); }
+    function bindRest() {
+      document.querySelectorAll("[data-rest-add]").forEach(b => b.onclick = addRest);
+      document.querySelectorAll("[data-rest-skip]").forEach(b => b.onclick = () => { stopRest(); refreshRest(); });
+      document.querySelectorAll("[data-rest-mute]").forEach(b => b.onclick = () => { state.data.settings.restMuted=!state.data.settings.restMuted; save(); refreshRest(); });
+    }
+    function tickRest() {
+      if (!restState.end) return;
+      const remaining = restRemaining(), time = qs("rest-time");
+      if (time) time.textContent = `${Math.floor(remaining/60)}:${String(remaining%60).padStart(2,"0")}`;
+      if (!remaining && !restState.alerted) {
+        restState.alerted=true; persistRest();
+        try { if (!state.data.settings.restMuted && restAudio?.state === "running") { const tone=restAudio.createOscillator(), gain=restAudio.createGain(); tone.connect(gain); gain.connect(restAudio.destination); gain.gain.value=0.15; tone.frequency.value=660; tone.start(); tone.stop(restAudio.currentTime+0.3); } } catch {}
+        refreshRest(); clearInterval(restInterval); restInterval=null;
+      }
+    }
     function exportRows() {
       const rows = [];
       for (let w=1; w<=8; w++) for (let d=1; d<=7; d++) {
         const day = planDay(w,d), saved = state.data.workouts[workoutKey(w,d)] || {};
+        if (saved.completedAt) rows.push({type:"session",week:w,gymDay:d,completedAt:saved.completedAt,note:saved.dayNote||""});
         day.items.forEach(item => {
           const rec = saved[itemKey(item)] || {};
           if (item.kind === "cardio") rows.push({ type:"workout", week:w, gymDay:d, focus:day.focus, exercise:item.name, set:"cardio", target:item.target, completed:!!rec.done, weight:"", note:rec.note||"", updatedAt:saved.updatedAt||"" });
@@ -1823,6 +1910,7 @@
         location.reload();
       }
     }
+    if (restState.end && restRemaining()) restInterval = setInterval(tickRest,250);
     render();
     globalThis.gymBackupAdapter = { getData: () => state.data, render };
     if ("serviceWorker" in navigator) navigator.serviceWorker.register("service-worker.js").catch(() => {});

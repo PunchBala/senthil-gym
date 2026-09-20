@@ -11,7 +11,7 @@ export function validateData(data) {
     for (const [key, workout] of Object.entries(data[archive])) {
       if (!/^w[1-8]d[1-7]$/.test(key) || !object(workout)) throw new Error('Invalid workout record.');
       for (const [name, record] of Object.entries(workout)) {
-        if (['startedAt', 'updatedAt', 'dayNote'].includes(name)) {
+        if (['startedAt', 'updatedAt', 'completedAt', 'dayNote'].includes(name)) {
           if (typeof record !== 'string') throw new Error('Invalid workout note or date.');
         } else if (!object(record) || (record.sets !== undefined && (!Array.isArray(record.sets) || record.sets.some(s => s !== null && !object(s))))) throw new Error('Invalid exercise record.');
       }
