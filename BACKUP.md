@@ -37,4 +37,4 @@ node --experimental-vm-modules test-backup.mjs
 
 The tests simulate the GitHub API. Live verification still requires the private repository, restricted token and app browser that contains the real logs.
 
-The earlier `cloud/` prototype is unused by this implementation and need not be installed or deployed.
+The app includes the adapted eight-week plan. Existing workouts from earlier plan versions are preserved in archives and included in JSON/CSV exports and GitHub backups. Food records remain in place. The earlier local `cloud/` prototype is unused and need not be installed or deployed.

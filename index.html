@@ -196,7 +196,7 @@
       { day: 7, focus: "Rest", warmup: [], cooldown: [], items: [] }
     ];
 
-    const weekNotes = {
+    const legacyWeekNotes = {
       1: "Start controlled. Use weights that feel like you could still do 2-3 clean reps at the end of each set.",
       2: "Slightly increase reps or time. Add weight only if Week 1 felt smooth and shoulder-friendly.",
       3: "Increase training density slightly. Main lifts can move up by a small weight increase if all Week 2 sets felt controlled.",
@@ -226,6 +226,1098 @@
         5: {"Easy Swim":["600 meters or 24 minutes",1]}
       }
     };
+
+
+    const originalBlocks = [
+  {
+    "source": "week 1-4 workout plan.xlsx",
+    "days": [
+      {
+        "day": 1,
+        "focus": "Core + resistance + cardio",
+        "warmup": [],
+        "cooldown": [],
+        "items": [
+          {
+            "name": "Cable crunches",
+            "target": "30",
+            "sets": 3,
+            "rest": "40sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Push ups",
+            "target": "15",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": false,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Db Deadlifts",
+            "target": "15",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Free Squats",
+            "target": "15",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": false,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Leg extensions",
+            "target": "15",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Leg press",
+            "target": "15",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Treadmill",
+            "target": "150 kcal (source target)",
+            "sets": 1,
+            "rest": "none",
+            "trackWeight": false,
+            "type": "cardio",
+            "note": "Original workbook prescription.",
+            "kind": "cardio"
+          }
+        ]
+      },
+      {
+        "day": 2,
+        "focus": "Core + resistance + cardio",
+        "warmup": [],
+        "cooldown": [],
+        "items": [
+          {
+            "name": "Mountain climbers",
+            "target": "30each",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": false,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Bench press",
+            "target": "9",
+            "sets": 5,
+            "rest": "20sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Barbell Squats",
+            "target": "12",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Squat thrusts",
+            "target": "15",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": false,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Db Lunge walk",
+            "target": "13 steps p/leg",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Leg curls",
+            "target": "15",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Calf raises",
+            "target": "15",
+            "sets": 4,
+            "rest": "25sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Eliptical",
+            "target": "150 kcal (source target)",
+            "sets": 1,
+            "rest": "none",
+            "trackWeight": false,
+            "type": "cardio",
+            "note": "Original workbook prescription.",
+            "kind": "cardio"
+          }
+        ]
+      },
+      {
+        "day": 3,
+        "focus": "Core + resistance + cardio",
+        "warmup": [],
+        "cooldown": [],
+        "items": [
+          {
+            "name": "Leg raises",
+            "target": "20",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": false,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Machine chest press",
+            "target": "15",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Seated cable rows",
+            "target": "15",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Lat pull downs",
+            "target": "15",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Db Military press",
+            "target": "15",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Db arnold press",
+            "target": "15",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Db shrugs",
+            "target": "15",
+            "sets": 4,
+            "rest": "25sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Cycle",
+            "target": "150 kcal (source target)",
+            "sets": 1,
+            "rest": "none",
+            "trackWeight": false,
+            "type": "cardio",
+            "note": "Original workbook prescription.",
+            "kind": "cardio"
+          }
+        ]
+      },
+      {
+        "day": 4,
+        "focus": "Core + resistance + cardio",
+        "warmup": [],
+        "cooldown": [],
+        "items": [
+          {
+            "name": "Elbow Planks",
+            "target": "45sec",
+            "sets": 4,
+            "rest": "45sec",
+            "trackWeight": false,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Push ups",
+            "target": "10",
+            "sets": 4,
+            "rest": "30sec",
+            "trackWeight": false,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Assisted Pull ups",
+            "target": "12",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Alternate Lunge jumps",
+            "target": "15",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": false,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Db Lateral riases",
+            "target": "20",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Cable double arm reverse flys",
+            "target": "15",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Eliptical",
+            "target": "150 kcal (source target)",
+            "sets": 1,
+            "rest": "none",
+            "trackWeight": false,
+            "type": "cardio",
+            "note": "Original workbook prescription.",
+            "kind": "cardio"
+          }
+        ]
+      },
+      {
+        "day": 5,
+        "focus": "Core + resistance + cardio",
+        "warmup": [],
+        "cooldown": [],
+        "items": [
+          {
+            "name": "Mountain climbers",
+            "target": "30each",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": false,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Barbell row",
+            "target": "12",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Db One arm row",
+            "target": "10",
+            "sets": 3,
+            "rest": "25sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Barbell bicep curls",
+            "target": "12",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Db Preacher curls",
+            "target": "14",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Tricep Bench dips",
+            "target": "13",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": false,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Tricep extensions",
+            "target": "12",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Reverse bicep curls",
+            "target": "12",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Tricep one arm extensions",
+            "target": "12",
+            "sets": 3,
+            "rest": "15sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Eliptical",
+            "target": "150 kcal (source target)",
+            "sets": 1,
+            "rest": "none",
+            "trackWeight": false,
+            "type": "cardio",
+            "note": "Original workbook prescription.",
+            "kind": "cardio"
+          }
+        ]
+      },
+      {
+        "day": 6,
+        "focus": "Swimming",
+        "warmup": [],
+        "cooldown": [],
+        "items": [
+          {
+            "name": "Swimming",
+            "target": "300 kcal (source target)",
+            "sets": 1,
+            "rest": "none",
+            "trackWeight": false,
+            "type": "cardio",
+            "kind": "cardio",
+            "note": "Original workbook target; no distance, duration or intensity is specified."
+          }
+        ],
+        "sourceRecovery": "Workbook also lists sauna/steam for 10 minutes. These are recorded here as source notes, not required workout tasks."
+      },
+      {
+        "day": 7,
+        "focus": "Rest",
+        "warmup": [],
+        "cooldown": [],
+        "items": []
+      }
+    ]
+  },
+  {
+    "source": "week 5-8 workout plan.xlsx",
+    "days": [
+      {
+        "day": 1,
+        "focus": "Core + resistance + cardio",
+        "warmup": [],
+        "cooldown": [],
+        "items": [
+          {
+            "name": "Cable crunches",
+            "target": "30",
+            "sets": 3,
+            "rest": "40sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Leg raises",
+            "target": "20",
+            "sets": 3,
+            "rest": "40sec",
+            "trackWeight": false,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Lat pull downs",
+            "target": "15",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Leg curls",
+            "target": "15",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Barbell deadlifts",
+            "target": "15",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Leg extensions",
+            "target": "15",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Leg press",
+            "target": "15",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Burpees with knee tuck jump",
+            "target": "12",
+            "sets": 4,
+            "rest": "45sec",
+            "trackWeight": false,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Cycle",
+            "target": "175 kcal (source target)",
+            "sets": 1,
+            "rest": "none",
+            "trackWeight": false,
+            "type": "cardio",
+            "note": "Original workbook prescription.",
+            "kind": "cardio"
+          }
+        ]
+      },
+      {
+        "day": 2,
+        "focus": "Core + resistance + cardio",
+        "warmup": [],
+        "cooldown": [],
+        "items": [
+          {
+            "name": "Elbow planks",
+            "target": "45sec",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": false,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Mountain climbers",
+            "target": "30each",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": false,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Bench press",
+            "target": "11",
+            "sets": 5,
+            "rest": "20sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Barbell Squats",
+            "target": "14",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Squat thrusts",
+            "target": "15",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": false,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Db Lunge walk",
+            "target": "14 steps p/leg",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Leg curls",
+            "target": "15",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Barbell clean press",
+            "target": "10",
+            "sets": 5,
+            "rest": "25sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Eliptical",
+            "target": "150 kcal (source target)",
+            "sets": 1,
+            "rest": "none",
+            "trackWeight": false,
+            "type": "cardio",
+            "note": "Original workbook prescription.",
+            "kind": "cardio"
+          }
+        ]
+      },
+      {
+        "day": 3,
+        "focus": "Core + resistance + cardio",
+        "warmup": [],
+        "cooldown": [],
+        "items": [
+          {
+            "name": "Swiss ball crunches",
+            "target": "17",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": false,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "TRX knee tucks",
+            "target": "25",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": false,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Machine chest press",
+            "target": "15",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Seated cable rows",
+            "target": "15",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Lat pull downs",
+            "target": "15",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Barbell clean press",
+            "target": "15",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Barbell shrugs",
+            "target": "15",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "DB military press",
+            "target": "15",
+            "sets": 4,
+            "rest": "25sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Eliptical",
+            "target": "125 kcal (source target)",
+            "sets": 1,
+            "rest": "none",
+            "trackWeight": false,
+            "type": "cardio",
+            "note": "Original workbook prescription.",
+            "kind": "cardio"
+          }
+        ]
+      },
+      {
+        "day": 4,
+        "focus": "Core + resistance + cardio",
+        "warmup": [],
+        "cooldown": [],
+        "items": [
+          {
+            "name": "Side plank Hip raises",
+            "target": "45sec",
+            "sets": 4,
+            "rest": "45sec",
+            "trackWeight": false,
+            "type": "exercise",
+            "note": "Original workbook prescription. The source specifies 45 seconds, not a rep count; it does not say whether this is per side.",
+            "kind": "exercise"
+          },
+          {
+            "name": "DB side crunch",
+            "target": "30each",
+            "sets": 3,
+            "rest": "45sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Push ups",
+            "target": "10",
+            "sets": 4,
+            "rest": "30sec",
+            "trackWeight": false,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Cable lateral raises",
+            "target": "12",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Alternate Lunge jumps",
+            "target": "15",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": false,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "DB front raises",
+            "target": "20",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Machine reverse flys",
+            "target": "15",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Eliptical",
+            "target": "175 kcal (source target)",
+            "sets": 1,
+            "rest": "none",
+            "trackWeight": false,
+            "type": "cardio",
+            "note": "Original workbook prescription.",
+            "kind": "cardio"
+          }
+        ]
+      },
+      {
+        "day": 5,
+        "focus": "Core + resistance + cardio",
+        "warmup": [],
+        "cooldown": [],
+        "items": [
+          {
+            "name": "TRX planks",
+            "target": "45sec",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": false,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Mountain climbers",
+            "target": "30each",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": false,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Barbell row",
+            "target": "12",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "D rod cable pull downs",
+            "target": "10",
+            "sets": 3,
+            "rest": "25sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription. Attachment and grip are unclear in the source; confirm before choosing a variation.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Barbell bicep curls",
+            "target": "12",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Db Preacher curls",
+            "target": "14",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Tricep Bench dips",
+            "target": "13",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": false,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Tricep extensions",
+            "target": "12",
+            "sets": 3,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Zotman DB curls",
+            "target": "12",
+            "sets": 4,
+            "rest": "30sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Reverse tricep pushdowns",
+            "target": "12",
+            "sets": 3,
+            "rest": "15sec",
+            "trackWeight": true,
+            "type": "exercise",
+            "note": "Original workbook prescription.",
+            "kind": "exercise"
+          },
+          {
+            "name": "Eliptical",
+            "target": "150 kcal (source target)",
+            "sets": 1,
+            "rest": "none",
+            "trackWeight": false,
+            "type": "cardio",
+            "note": "Original workbook prescription.",
+            "kind": "cardio"
+          }
+        ]
+      },
+      {
+        "day": 6,
+        "focus": "Swimming",
+        "warmup": [],
+        "cooldown": [],
+        "items": [
+          {
+            "name": "Swimming",
+            "target": "350 kcal (source target)",
+            "sets": 1,
+            "rest": "none",
+            "trackWeight": false,
+            "type": "cardio",
+            "kind": "cardio",
+            "note": "Original workbook target; no distance, duration or intensity is specified."
+          }
+        ],
+        "sourceRecovery": "Workbook also lists steam/sauna for 20 minutes and an extreme cold shower. These are recorded here as source notes, not required workout tasks."
+      },
+      {
+        "day": 7,
+        "focus": "Rest",
+        "warmup": [],
+        "cooldown": [],
+        "items": []
+      }
+    ]
+  }
+];
+    const weekNotes = {
+      1: "Start with sessions 1, 3 and 5 on non-consecutive days. Two sets per exercise, light loads, 3–4 reps left in reserve. Sessions 2 and 4 can wait.",
+      2: "Repeat week 1. Add session 2 only if energy, soreness and shoulder response allow. No need to fit every session into seven days.",
+      3: "Build toward the five-session sequence if recovered. A third set is available for main exercises; keep two if that is enough.",
+      4: "Repeat the first block. Increase one thing at a time: reps first, then the smallest weight increase. Keep 3–4 reps in reserve.",
+      5: "Second block: selected exercise changes from your original plan, adapted for your shoulder. Return to two sets while learning variations.",
+      6: "Repeat week 5. A third set is available for main exercises only if the previous sessions and next mornings were comfortable.",
+      7: "Keep the same exercise selection. Progress only where form, energy and shoulder response are steady; more load is optional.",
+      8: "Consolidate this block without max-effort testing. Review weight trend, shoulder symptoms and consistency before planning week 9."
+    };
+    const dietBlocks = [
+      {weeks:"1–2",calories:2000,carb:40,protein:28,fat:32,c:200,p:140,f:71.11,fibre:18},
+      {weeks:"3–4",calories:2070,carb:38,protein:30,fat:32,c:196.65,p:155.25,f:73.60,fibre:31},
+      {weeks:"5–6",calories:1884,carb:36,protein:34,fat:30,c:169.56,p:160.14,f:62.80,fibre:26},
+      {weeks:"7–8",calories:1725,carb:33,protein:36,fat:31,c:142.31,p:155.25,f:59.42,fibre:18},
+      {weeks:"9–10",calories:1710,carb:32,protein:33,fat:35,c:136.80,p:141.08,f:66.50,fibre:27},
+      {weeks:"11–12",calories:1672,carb:33.5,protein:33.5,fat:33,c:140.03,p:140.03,f:61.31,fibre:34}
+    ];
+    function originalDay(week, dayNo) {
+      if (!Number.isInteger(week) || week < 1 || week > 8) throw new Error("No source workout for this week");
+      const block = originalBlocks[week <= 4 ? 0 : 1];
+      const day = structuredClone(block.days.find(d => d.day === dayNo));
+      day.week = week;
+      day.source = block.source;
+      day.progression = weekNotes[week];
+      day.items.forEach(item => { item.video = item.name === "D rod cable pull downs" ? null : YT(item.name + " exercise proper form"); });
+      return day;
+    }
+
+    // The workbooks above remain the source. These are explicit return-to-training adaptations.
+    function planDay(week, dayNo) {
+      const source = originalDay(week, dayNo);
+      const later = week >= 5;
+      const mainSets = week <= 2 || week === 5 ? 2 : 3;
+      const lift = (name, target, sets = mainSets, rest = "90 seconds", note = "", trackWeight = true) =>
+        ex(name, target, sets, rest, trackWeight, "exercise", note || "Light, controlled reps. Finish with 3–4 reps in reserve. Stop or substitute if the shoulder reacts.", name + " proper form");
+      const core = (name, target) => lift(name, target, 2, "45–60 seconds", "Keep arms relaxed beside you; avoid bracing through the left shoulder.", false);
+      const row = (name = "Seated Cable Row") => lift(name, "12–15 reps", mainSets, "90 seconds", "Use both hands and a comfortable neutral grip. Pulling was previously tolerated; check how it feels now.");
+      const press = lift("Neutral-Grip Machine Chest Press", "10–12 reps", 2, "120 seconds", "OPTIONAL trial only when daily movements and warm-up are pain-free. Use a very light load, elbows slightly tucked and a comfortable range. If it hurts, omit it; a machine is not automatically pain-free.");
+      press.optional = true;
+      const pulldown = lift("Neutral-Grip Lat Pulldown", "12–15 reps", mainSets, "90 seconds", "Only if overhead reach and pulling are comfortable. Otherwise omit it. No behind-neck pulling.");
+      const walk = cardio("Treadmill Walk", week <= 2 ? "10–15 minutes" : "15–20 minutes", "Comfortable pace where you can talk. No calorie-burn target; do not lean on the handles.", "treadmill walking form");
+      const bike = cardio("Stationary Bike", week <= 2 ? "10–15 minutes" : "15–20 minutes", "Easy to moderate effort. Keep your shoulders relaxed and avoid loading the handlebars.", "stationary bike setup");
+      const days = {
+        1: [core("Reverse Crunch", "10–15 reps"),
+          ...(later ? [pulldown] : [row()]),
+          lift("Barbell Romanian Deadlift", "10–12 reps", mainSets, "120 seconds", "Start light with arms hanging naturally. Previously tolerated deadlifts do not guarantee every variation is comfortable."),
+          ...(!later ? [lift("Bodyweight Squat", "12–15 reps", 2, "90 seconds", "Use a comfortable depth and keep arms relaxed.", false)] : [lift("Seated Leg Curl", "12–15 reps")]),
+          lift("Leg Extension", "12–15 reps", 2, "60–90 seconds"), lift("Leg Press", "12–15 reps", mainSets, "120 seconds"), later ? bike : walk],
+        2: [core("Supine Heel Taps", "8–12 reps each side"),
+          lift("Belt Squat or Bodyweight Squat", "12–15 reps", mainSets, "120 seconds", "Use a belt-squat machine only if available; otherwise bodyweight. Avoid a bar position that stresses the shoulder.", false),
+          lift("Reverse Lunge", "8–10 reps each leg", 2, "90 seconds", "Bodyweight initially, with light right-hand support if needed. No jumping or one-hand dumbbell loading.", false),
+          lift("Seated Leg Curl", "12–15 reps"), lift("Calf Raise", "12–15 reps", 2, "60–90 seconds", "Bodyweight or a seated machine; avoid shoulder pads if uncomfortable.", false), bike],
+        3: [core(later ? "Small Curl-Up" : "Reverse Crunch", "10–15 reps"), press, row(), pulldown,
+          lift("Barbell Shrug", "12–15 reps", 2, "60–90 seconds", "Light load, arms at your sides. Use only if still pain-free; do not roll your shoulders."), bike],
+        4: [core("Supine Heel Slide", "10 reps each side"),
+          lift(later ? "Low Step-Up" : "Reverse Lunge", "8–10 reps each leg", 2, "90 seconds", "Bodyweight, controlled steps and light right-hand support if needed. No lunge jumps.", false),
+          lift("Leg Extension", "12–15 reps", 2, "60–90 seconds"), walk],
+        5: [core("Reverse Crunch", "10–15 reps"), row(later ? "Chest-Supported Machine Row" : "Seated Cable Row"),
+          lift(later ? "Two-Hand Cable Curl" : "Barbell Bicep Curl", "12–15 reps", 2, "60–90 seconds", "Keep elbows near your sides. Omit if the front of your shoulder becomes uncomfortable. No one-hand dumbbell work."),
+          lift("Seated Leg Curl", "12–15 reps", 2, "60–90 seconds"), bike],
+        6: [cardio("Easy Walk or Comfortable Swim", "15–20 minutes, optional", "Walking is the default. Swim only if your shoulder is comfortable during and the next morning; do not chase the old 300–350 kcal target. Rest instead if tired.", "easy walking exercise")],
+        7: []
+      };
+      const day = {...source,
+        focus: ["", "Core + legs + pulling", "Legs + core · build up to this", "Back + optional light chest", "Light legs + cardio · optional", "Back + biceps + core", "Optional easy activity", "Rest"][dayNo],
+        items: days[dayNo],
+        warmup: dayNo <= 5 ? ["5 minutes easy walking or cycling", "Gentle shoulder rotations in a comfortable range — 5 each way, no forcing", "1–2 light practice sets before the first weighted exercise"] : [],
+        cooldown: dayNo <= 5 ? ["2–3 minutes easy walking and relaxed breathing", "Gentle lower-body stretches if comfortable; no forced shoulder stretching"] : [],
+        adaptation: "Keeps the original core–weights–cardio format. Lower volume, longer rests, shoulder-loaded core replaced, and pressing limited to one optional light session. This is an adapted programme, not the original prescription."
+      };
+      if ([1,3,5].includes(dayNo)) {
+        const recovery = [
+          lift("Gentle Shoulder-Blade Squeeze", "8–10 reps; hold 3 seconds", 1, "30–45 seconds", "Arms relaxed at your sides. Gently draw shoulder blades together without shrugging or forcing them down.", false),
+          lift("Light Band External Rotation", "8–10 slow reps", 1, "45 seconds", "Elbows tucked beside your waist, very light band and a comfortable range. Optional maintenance exercise, not treatment for a diagnosed injury.", false),
+          lift("Comfortable Wall Slide", "6–8 slow reps", 1, "45 seconds", "Only within a comfortable range. Do not push through pinching, lean into the arm or force overhead range.", false)
+        ];
+        recovery.forEach(item => { item.optional = true; item.recovery = true; });
+        day.items.push(...recovery);
+      }
+      return day;
+    }
+
+    function shoulderGuidanceHTML() {
+      return `<div class="card"><h3>Shoulder response comes first</h3><p class="muted">You report no recent pain after several months away from training. Your history is undiagnosed, and tolerance under load needs rebuilding. Aim for pain-free exercise. Stop for sharp pain, increasing discomfort, weakness or pain above your previous 3/10 ceiling. That ceiling is not a target or proof that a movement is safe.</p><p class="mini">Symptoms should settle and be no worse the next morning. If they increase, omit the trigger and reduce the next session. Arrange a physio/MSK assessment if pain returns or persists. <a class="accent" href="https://www.nhs.uk/symptoms/shoulder-pain/" target="_blank" rel="noreferrer">NHS shoulder guidance</a></p></div>`;
+    }
 
     const reminderMessages = {
       breakfast: [
@@ -333,6 +1425,18 @@
       data: JSON.parse(localStorage.getItem("sg-data") || "{}")
     };
     if (!state.data.workouts) state.data.workouts = {};
+    if (!["original-8-week-v1", "adapted-8-week-v2"].includes(state.data.planVersion)) {
+      state.data.previousPlanWorkouts = state.data.workouts;
+      state.data.workouts = {};
+      state.data.planVersion = "original-8-week-v1";
+      localStorage.setItem("sg-data", JSON.stringify(state.data));
+    }
+    if (state.data.planVersion === "original-8-week-v1") {
+      state.data.sourcePlanWorkouts = state.data.workouts;
+      state.data.workouts = {};
+      state.data.planVersion = "adapted-8-week-v2";
+      localStorage.setItem("sg-data", JSON.stringify(state.data));
+    }
     if (!state.data.food) state.data.food = {};
     if (!state.data.settings) state.data.settings = { unit: "kg", reminders: { breakfast: true, lunch: true, gym: true, dinner: true } };
 
@@ -348,7 +1452,7 @@
     function stretch(name, target, note, video) {
       return { name, target, note, video: YT(video) };
     }
-    function planDay(week, dayNo) {
+    function legacyPlanDay(week, dayNo) {
       const day = structuredClone(baseDays.find(d => d.day === dayNo));
       day.week = week;
       const diff = changes[week]?.[dayNo] || {};
@@ -363,7 +1467,7 @@
       if (week >= 3 && dayNo <= 4) {
         day.warmup = day.warmup.map(line => line.replace(/10/g, week === 4 ? "15" : "12"));
       }
-      day.progression = weekNotes[week];
+      day.progression = legacyWeekNotes[week];
       return day;
     }
     function workoutKey(w, d) { return `w${w}d${d}`; }
@@ -376,7 +1480,7 @@
       return Number.isFinite(number) && number >= 0 ? number : null;
     }
     function exerciseBests(item, week) {
-      const assisted = item.name === "Assisted Pull-Up Machine";
+      const assisted = /assisted.*pull/i.test(item.name);
       const entries = [];
       Object.entries(state.data.workouts).forEach(([key, workout]) => {
         const match = /^w(\d+)d(\d+)$/.exec(key);
@@ -454,18 +1558,22 @@
       const saved = state.data.workouts[workoutKey(w, d)] || {};
       let total = 0, done = 0;
       day.items.forEach(item => {
-        total += item.kind === "cardio" ? 1 : item.sets;
+        if (item.optional) return;
+        const requiredSets = Math.min(item.sets, 2);
+        total += item.kind === "cardio" ? 1 : requiredSets;
         const rec = saved[itemKey(item)] || {};
         if (item.kind === "cardio") done += rec.done ? 1 : 0;
-        else for (let i = 0; i < item.sets; i++) if (rec.sets?.[i]?.done) done++;
+        else for (let i = 0; i < requiredSets; i++) if (rec.sets?.[i]?.done) done++;
       });
       return { total, done, pct: total ? Math.round(done / total * 100) : 0 };
     }
 
     function homeHTML() {
       const latest = findLatest();
+      const archivedCount = Object.keys(state.data.previousPlanWorkouts || {}).length + Object.keys(state.data.sourcePlanWorkouts || {}).length;
       return `<div class="stack">
-        <button class="tile primary" data-go="workout"><strong>Workout Plan</strong><span>Weeks 1-4, gym days not calendar days</span></button>
+        <button class="tile primary" data-go="workout"><strong>8-week Workout Plan</strong><span>Weeks 1–8 · gradual return with shoulder adaptations</span></button>
+        ${archivedCount ? `<div class="card stack"><h3>Earlier workout logs preserved</h3><p class="muted">${archivedCount} records from your previous plan are archived and included in exports and cloud backups. This eight-week plan starts with separate set ticks and weights.</p><button class="action" data-go="export">Export earlier logs</button></div>` : ""}
         <div class="grid">
           <button class="tile" data-go="food"><strong>Food Tracker</strong><span>Breakfast, lunch, pre-workout, dinner</span></button>
           <button class="tile" data-go="stretches"><strong>Stretch Library</strong><span>Demo support by muscle group</span></button>
@@ -478,7 +1586,7 @@
           <div style="height:10px"></div>
           <button class="action primary" data-open-day="${latest ? `${latest.week},${latest.day}` : "1,1"}">Open Workout</button>
         </div>
-        <div class="card"><h3>V1 Focus</h3><p class="muted">Quick set ticks, per-set weights, simple meal ticks, calm sequence days, and exportable data.</p></div>
+        <div class="card"><h3>Start with three sessions</h3><p class="muted">After months away, begin with sessions 1, 3 and 5 on non-consecutive days. Build toward the original five-session rhythm as recovery allows. Optional exercises do not count against your completion score.</p></div>
       </div>`;
     }
 
@@ -492,7 +1600,7 @@
           <div class="stack">${group.items.map(item => `<div class="exercise">
             <div class="exercise-head">
               <div><h3>${item.name}</h3><p class="muted">${item.target}</p></div>
-              <a class="demo" href="${item.video}" target="_blank" rel="noreferrer">Watch Demo</a>
+              ${item.video ? `<a class="demo" href="${item.video}" target="_blank" rel="noreferrer">Watch Demo</a>` : ""}
             </div>
             <p class="mini">${item.note}</p>
           </div>`).join("")}</div>
@@ -503,14 +1611,16 @@
     function workoutHTML() {
       if (!state.week) {
         return `<div class="stack">
-          <div class="section-title"><h2>Workout Plan</h2><span class="pill">4 weeks</span></div>
-          <div class="grid">${[1,2,3,4].map(w => `<button class="tile" data-week="${w}"><strong>Week ${w}</strong><span>${weekNotes[w]}</span></button>`).join("")}</div>
+          <div class="section-title"><h2>Workout Plan</h2><span class="pill">8 weeks</span></div>
+          <div class="card"><p class="muted">Adapted from your original two blocks for a gradual return after months away. Start with sessions 1, 3 and 5, with a rest day between. Add session 2, then the lighter session 4 only as recovery allows. Insert rest days freely; do not cram missed sessions into a week. Week 9 can wait until you finish week 8.</p></div>
+          ${shoulderGuidanceHTML()}
+          <div class="grid">${[1,2,3,4,5,6,7,8].map(w => `<button class="tile" data-week="${w}"><strong>Week ${w}</strong><span>${weekNotes[w]}</span></button>`).join("")}</div>
         </div>`;
       }
       if (!state.day) {
         return `<div class="stack">
           <div class="section-title"><h2>Week ${state.week}</h2><span class="pill">Gym sequence</span></div>
-          <div class="card"><p class="muted">${weekNotes[state.week]}</p></div>
+          <div class="card"><p class="muted">${weekNotes[state.week]} If using all five sessions, a possible sequence is 1, 2, rest, 3, 4, 5, rest; easy activity can replace session 4 or be omitted. Extra sets and sessions are conditional, never compulsory.</p></div>
           <div class="grid">${[1,2,3,4,5,6,7].map(d => {
             const day = planDay(state.week, d), st = completedStats(state.week, d);
             return `<button class="tile" data-day="${d}"><strong>Gym Day ${d}</strong><span>${day.focus}</span><div class="progress"><i style="width:${st.pct}%"></i></div></button>`;
@@ -522,9 +1632,13 @@
       const saved = state.data.workouts[workoutKey(state.week, state.day)] || {};
       return `<div class="stack">
         <div class="section-title"><div><h2>Week ${state.week} / Gym Day ${state.day}</h2><p class="muted">${day.focus}</p></div><span class="pill">${completedStats(state.week,state.day).pct}%</span></div>
-        <div class="card"><h3>Warm-up</h3><ul class="list-only">${day.warmup.map(x => `<li>${x}</li>`).join("") || "<li>Ease in and keep it comfortable.</li>"}</ul></div>
+        <div class="card"><h3>Adapted session</h3><p class="muted">${day.adaptation}</p><p class="mini">${weekNotes[state.week]} If three sets are shown, staying at two is fine while rebuilding. Add weight only after all reps are comfortable on two separate sessions with no next-morning flare.</p></div>
+        ${shoulderGuidanceHTML()}
+        <details class="card"><summary>Original workbook reference</summary><p class="mini">${day.source}. Reference only; follow the adapted session below.</p><ul class="list-only">${originalDay(state.week,state.day).items.map(item => `<li>${item.name}: ${item.target}${item.kind === "exercise" ? ` × ${item.sets}; rest ${item.rest}` : ""}</li>`).join("")}</ul>${day.sourceRecovery ? `<p class="mini">${day.sourceRecovery}</p>` : ""}</details>
+        <div class="card"><h3>Shoulder-blade maintenance</h3><p class="muted">Gentle optional exercises are included in sessions 1, 3 and 5. Start with one easy set; skip anything that irritates the shoulder. Face pulls can wait until light rowing and these movements are comfortable. This is not a diagnosis-specific rehabilitation programme.</p><textarea data-shoulder-recovery placeholder="Record tolerated exercises or physio guidance">${String(state.data.shoulderRecovery || "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}</textarea></div>
+        <div class="card"><h3>Warm-up</h3><ul class="list-only">${day.warmup.map(x => `<li>${x}</li>`).join("") || "<li>Not specified in the original workbook.</li>"}</ul></div>
         ${day.items.map(item => itemHTML(day, item, saved[itemKey(item)] || {})).join("")}
-        <div class="card"><h3>Optional Cooldown</h3><ul class="list-only">${day.cooldown.map(x => `<li>${x}</li>`).join("") || "<li>Easy breathing and light recovery.</li>"}</ul></div>
+        <div class="card"><h3>Optional Cooldown</h3><ul class="list-only">${day.cooldown.map(x => `<li>${x}</li>`).join("") || "<li>Not specified in the original workbook.</li>"}</ul></div>
         <div class="card"><h3>Day Notes</h3><textarea data-note="${workoutKey(state.week,state.day)}" placeholder="Anything useful from today...">${escapeHTML(saved.dayNote || "")}</textarea></div>
       </div>`;
     }
@@ -532,29 +1646,20 @@
     function itemHTML(day, item, rec) {
       const key = `${workoutKey(day.week, day.day)}|${itemKey(item)}`;
       if (item.kind === "cardio") {
-        return `<div class="exercise"><div class="exercise-head"><div><h3>${item.name}</h3><p class="muted">Target: ${item.target}</p></div><a class="demo" href="${item.video}" target="_blank" rel="noreferrer">Watch Demo</a></div>
+        return `<div class="exercise"><div class="exercise-head"><div><h3>${item.name}</h3><p class="muted">Target: ${item.target}</p></div>${item.video ? `<a class="demo" href="${item.video}" target="_blank" rel="noreferrer">Watch Demo</a>` : ""}</div>
           <p class="mini">${item.note}</p>
           <div class="set-row"><button class="check ${rec.done ? "done" : ""}" data-cardio="${key}">${rec.done ? "✓" : ""}</button><input data-cardio-note="${key}" value="${escapeHTML(rec.note || "")}" placeholder="Type time / incline / resistance"></div>
         </div>`;
       }
-      return `<div class="exercise"><div class="exercise-head"><div><h3>${item.name}</h3><p class="muted">${item.target} x ${item.sets} · Rest ${item.rest}</p></div><a class="demo" href="${item.video}" target="_blank" rel="noreferrer">Watch Demo</a></div>
+      return `<div class="exercise"><div class="exercise-head"><div><h3>${item.name}${item.optional ? ' · Optional' : ''}</h3><p class="muted">${item.target} x ${item.sets} · Rest ${item.rest}</p></div>${item.video ? `<a class="demo" href="${item.video}" target="_blank" rel="noreferrer">Watch Demo</a>` : ""}</div>
         <p class="mini">${item.note}</p>
         ${item.trackWeight ? `<div class="weight-bests" data-bests="${itemKey(item)}" aria-live="polite">${weightBestsHTML(item, day.week)}</div>` : ""}
         <div class="sets">${Array.from({ length: item.sets }, (_, i) => {
           const set = rec.sets?.[i] || {};
-          return `<div class="set-row"><button class="check ${set.done ? "done" : ""}" data-set="${key}|${i}">${set.done ? "✓" : ""}</button>${item.trackWeight ? `<input data-weight="${key}|${i}" value="${escapeHTML(set.weight || "")}" placeholder="Set ${i+1} weight (${escapeHTML(state.data.settings.unit)})">` : `<span class="mini">Set ${i+1}</span>`}</div>`;
+          return `<div class="set-row"><button class="check ${set.done ? "done" : ""}" data-set="${key}|${i}">${set.done ? "✓" : ""}</button>${item.trackWeight ? `<input data-weight="${key}|${i}" value="${escapeHTML(set.weight || "")}" placeholder="Set ${i+1}${i >= 2 ? ' (optional)' : ''} weight (${escapeHTML(state.data.settings.unit)})">` : `<span class="mini">Set ${i+1}${i >= 2 ? ' · Optional' : ''}</span>`}</div>`;
         }).join("")}</div></div>`;
     }
 
-    const dietBlocks = [
-      {weeks:"1–2",calories:2000,carb:40,protein:28,fat:32,c:200,p:140,f:71.11,fibre:18},
-      {weeks:"3–4",calories:2070,carb:38,protein:30,fat:32,c:196.65,p:155.25,f:73.60,fibre:31},
-      {weeks:"5–6",calories:1884,carb:36,protein:34,fat:30,c:169.56,p:160.14,f:62.80,fibre:26},
-      {weeks:"7–8",calories:1725,carb:33,protein:36,fat:31,c:142.31,p:155.25,f:59.42,fibre:18},
-      {weeks:"9–10",calories:1710,carb:32,protein:33,fat:35,c:136.80,p:141.08,f:66.50,fibre:27},
-      {weeks:"11–12",calories:1672,carb:33.5,protein:33.5,fat:33,c:140.03,p:140.03,f:61.31,fibre:34}
-    ];
-    function escapeHTML(value) { return String(value ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
     function foodHTML() {
       const k = todayKey();
       const food = state.data.food[k] || {};
@@ -587,13 +1692,13 @@
       return `<div class="stack"><div class="section-title"><h2>Export Data</h2><span class="pill">Analysis ready</span></div>
         <button class="tile primary" data-export="json"><strong>Export JSON</strong><span>Best for future apps, servers, and full history</span></button>
         <button class="tile" data-export="csv"><strong>Export CSV</strong><span>Best for Excel, Sheets, and quick analysis</span></button>
-        <div class="card"><h3>Includes</h3><p class="muted">Plan position, real timestamps, set ticks, weights, cardio notes, gym day notes, and food ticks by calendar date.</p></div>
+        <div class="card"><h3>Includes</h3><p class="muted">Previous app workout records are preserved separately and included in exports. Current plan position, real timestamps, set ticks, weights, cardio notes, gym day notes, and food ticks by calendar date.</p></div>
       </div>`;
     }
 
     function settingsHTML() {
       return `<div class="stack"><div class="section-title"><h2>More</h2><span class="pill">Settings</span></div>
-        ${globalThis.GymBackup?.panelHTML() || '<div class="card"><h3>GitHub backup</h3><p>Loading backup controls…</p></div>'}
+        ${globalThis.GymBackup?.panelHTML() || '<div class="card"><h3>Cloud backup</h3><p class="muted">Loading backup controls…</p></div>'}
         <button class="tile" data-go="export"><strong>Export Data</strong><span>Save your history before major changes</span></button>
         <button class="tile" data-go="stretches"><strong>Stretch Library</strong><span>Demo support by muscle group</span></button>
         <div class="setting-row"><div class="switchline"><strong>Weight unit</strong><input data-unit value="${escapeHTML(state.data.settings.unit)}" style="max-width:90px"></div></div>
@@ -604,6 +1709,7 @@
 
     function bind() {
       globalThis.GymBackup?.bind();
+      document.querySelectorAll("[data-shoulder-recovery]").forEach(t => t.oninput = () => { state.data.shoulderRecovery = t.value; save(); });
       document.querySelectorAll("[data-go]").forEach(b => b.onclick = () => navigate(b.dataset.go));
       document.querySelectorAll("[data-week]").forEach(b => b.onclick = () => navigate("workout", { week: Number(b.dataset.week), day: null }));
       document.querySelectorAll("[data-day]").forEach(b => navigateOnClick(b, () => navigate("workout", { week: state.week, day: Number(b.dataset.day) })));
@@ -643,7 +1749,7 @@
       x.itemRec.sets[x.set].weight = value;
       x.rec.updatedAt = new Date().toISOString();
       save();
-      const exercise = baseDays.flatMap(day => day.items).find(item => itemKey(item) === x.item);
+      const exercise = (state.week && state.day ? planDay(state.week, state.day).items : []).find(item => itemKey(item) === x.item) || [...originalBlocks.flatMap(block => block.days), ...baseDays].flatMap(day => day.items).find(item => itemKey(item) === x.item);
       const panel = document.querySelector(`[data-bests="${x.item}"]`);
       if (panel && exercise) panel.innerHTML = weightBestsHTML(exercise, state.week);
     }
@@ -675,13 +1781,24 @@
     }
     function exportRows() {
       const rows = [];
-      for (let w=1; w<=4; w++) for (let d=1; d<=7; d++) {
+      for (let w=1; w<=8; w++) for (let d=1; d<=7; d++) {
         const day = planDay(w,d), saved = state.data.workouts[workoutKey(w,d)] || {};
         day.items.forEach(item => {
           const rec = saved[itemKey(item)] || {};
           if (item.kind === "cardio") rows.push({ type:"workout", week:w, gymDay:d, focus:day.focus, exercise:item.name, set:"cardio", target:item.target, completed:!!rec.done, weight:"", note:rec.note||"", updatedAt:saved.updatedAt||"" });
           else for (let i=0; i<item.sets; i++) rows.push({ type:"workout", week:w, gymDay:d, focus:day.focus, exercise:item.name, set:i+1, target:item.target, completed:!!rec.sets?.[i]?.done, weight:rec.sets?.[i]?.weight||"", note:saved.dayNote||"", updatedAt:saved.updatedAt||"" });
         });
+      }
+      for (const [archiveType, archive] of [["previous-plan", state.data.previousPlanWorkouts], ["source-plan", state.data.sourcePlanWorkouts]]) {
+      Object.entries(archive || {}).forEach(([key, saved]) => {
+        const match = /^w(\d+)d(\d+)$/.exec(key);
+        if (!match) return;
+        Object.entries(saved).forEach(([exercise, rec]) => {
+          if (!rec || typeof rec !== "object") return;
+          if (Array.isArray(rec.sets)) rec.sets.forEach((set, i) => rows.push({type:archiveType,week:Number(match[1]),gymDay:Number(match[2]),exercise,set:i+1,weight:set?.weight??"",completed:!!set?.done,note:saved.dayNote||"",updatedAt:saved.updatedAt||""}));
+          else rows.push({type:archiveType,week:Number(match[1]),gymDay:Number(match[2]),exercise,completed:!!rec.done,note:rec.note||saved.dayNote||"",updatedAt:saved.updatedAt||""});
+        });
+      });
       }
       Object.entries(state.data.food).forEach(([date, f]) => rows.push({ type:"food", date, breakfast:!!f.breakfast, lunch:!!f.lunch, preworkout:!!f.preworkout, dinner:!!f.dinner, snack:!!f.snack, note:f.note||"", updatedAt:f.updatedAt||"" }));
       return rows;
