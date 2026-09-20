@@ -543,15 +543,40 @@
         }).join("")}</div></div>`;
     }
 
+    const dietBlocks = [
+      {weeks:"1–2",calories:2000,carb:40,protein:28,fat:32,c:200,p:140,f:71.11,fibre:18},
+      {weeks:"3–4",calories:2070,carb:38,protein:30,fat:32,c:196.65,p:155.25,f:73.60,fibre:31},
+      {weeks:"5–6",calories:1884,carb:36,protein:34,fat:30,c:169.56,p:160.14,f:62.80,fibre:26},
+      {weeks:"7–8",calories:1725,carb:33,protein:36,fat:31,c:142.31,p:155.25,f:59.42,fibre:18},
+      {weeks:"9–10",calories:1710,carb:32,protein:33,fat:35,c:136.80,p:141.08,f:66.50,fibre:27},
+      {weeks:"11–12",calories:1672,carb:33.5,protein:33.5,fat:33,c:140.03,p:140.03,f:61.31,fibre:34}
+    ];
+    function escapeHTML(value) { return String(value ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
     function foodHTML() {
       const k = todayKey();
       const food = state.data.food[k] || {};
       return `<div class="stack"><div class="section-title"><h2>Food Tracker</h2><span class="pill">${k}</span></div>
-        ${["Breakfast","Lunch","Pre-workout","Dinner"].map(meal => {
+        ${["Breakfast","Lunch","Pre-workout","Dinner","Snack"].map(meal => {
           const id = meal.toLowerCase().replace(/[^a-z]+/g,"");
-          return `<div class="meal"><strong>${meal}</strong><button class="check ${food[id] ? "done" : ""}" data-meal="${id}">${food[id] ? "✓" : ""}</button></div>`;
+          return `<div class="meal"><strong>${meal}</strong><button class="check ${food[id] ? "done" : ""}" data-meal="${id}" aria-label="${meal} completed" aria-pressed="${!!food[id]}">${food[id] ? "✓" : ""}</button></div>`;
         }).join("")}
-        <div class="card"><h3>Food Notes</h3><textarea data-food-note="${k}" placeholder="Optional note for today...">${food.note || ""}</textarea></div>
+        <div class="card stack"><h3>Diet log · Weeks 1 &amp; 2</h3><p class="muted">Your supplied review records the same daily plan for both weeks. These are reported daily figures, not measured weekly averages or a record of every meal eaten.</p>
+          <div class="grid">${[1,2].map(week => `<div class="card stack"><h3>Week ${week}</h3><strong class="accent">2,062 kcal / day</strong><p class="muted">Protein 181 g · Carbs 194 g<br>Fat 70 g · Fibre 46 g</p><span class="pill">Reported meal plan</span></div>`).join("")}</div>
+          <p class="mini">Report targets: 2,005 kcal · protein 170 g · carbs 185 g · fat 65 g · fibre 30 g. Figures reproduced as supplied; calorie and macro totals may not reconcile. Sodium was not assessed.</p>
+        </div>
+        <details class="card"><summary><strong>Weeks 1–2 · meals &amp; ingredients</strong></summary><div class="stack" style="margin-top:14px">
+          <div><h3>Breakfast · Overnight oats</h3><p class="muted">Rolled oats, whey isolate, fat-free natural yogurt, unsweetened almond milk, chia seeds, strawberries, cacao, a small amount of agave and almonds.</p><p class="mini">Individual portions and breakfast macros were not supplied.</p></div>
+          <div><h3>Lunch · Smoked salmon guacamole wrap</h3><p class="muted">Mission Carb Balance wrap, 100 g smoked salmon, 50 g baby spinach, 1 mini guacamole, approximately 50 g tzatziki and 10 g sriracha.</p><p class="mini">Approx. 517 kcal · protein 42 g · carbs 31 g · fat 29 g · fibre 16 g</p></div>
+          <div><h3>Dinner · Chikkar chole &amp; chicken</h3><p class="muted">Chikkar chole, chicken breast, sweetcorn, carrot and cucumber.</p><p class="mini">Approx. 749 kcal · protein 67 g · carbs 94 g · fat 18 g · fibre 15 g. Portions were not supplied.</p></div>
+          <div><h3>Snack · Arla protein chocolate drink</h3><p class="mini">Approx. 246 kcal · protein 27 g. Other macros were not supplied.</p></div>
+        </div></details>
+        <div class="card stack"><h3>Review at a glance</h3><p class="muted">The supplied report rates this plan 9.3/10, highlighting protein, fibre, fat quality, legumes, fruit and vegetables, and practical meal preparation.</p><p class="muted">Its follow-up points: check iodine coverage, rotate proteins and colourful plants, monitor fibre comfort, and check supplement labels for overlapping doses.</p><p class="mini">Reported supplements: vitamin D, EPA/DHA omega-3 and hair/nail gummies. Nutrient assessments and the score come from your report; exact micronutrient amounts were not supplied.</p></div>
+        <details class="card"><summary><strong>Later weeks · high-level reference</strong></summary><div class="stack" style="margin-top:14px"><p class="muted">Previous plan targets, pending review after the two-week trial. These are reference figures, not logged intake or automatic calorie changes.</p>
+          ${dietBlocks.slice(1).map(b => `<p class="muted"><strong>Weeks ${b.weeks}</strong> · ${b.calories.toLocaleString("en-GB")} kcal/day · ${Math.round(b.p)} g protein</p>`).join("")}
+          <p class="mini">Review weight trend, hunger, energy and training recovery before choosing the next target.</p>
+        </div></details>
+        <p class="mini">Today's meal ticks record completion only; they do not calculate calories or macros or mark Week 1 or 2 complete.</p>
+        <div class="card"><h3>Food Notes</h3><textarea data-food-note="${k}" placeholder="Optional note for today...">${escapeHTML(food.note || "")}</textarea></div>
       </div>`;
     }
 
@@ -653,7 +678,7 @@
           else for (let i=0; i<item.sets; i++) rows.push({ type:"workout", week:w, gymDay:d, focus:day.focus, exercise:item.name, set:i+1, target:item.target, completed:!!rec.sets?.[i]?.done, weight:rec.sets?.[i]?.weight||"", note:saved.dayNote||"", updatedAt:saved.updatedAt||"" });
         });
       }
-      Object.entries(state.data.food).forEach(([date, f]) => rows.push({ type:"food", date, breakfast:!!f.breakfast, lunch:!!f.lunch, preworkout:!!f.preworkout, dinner:!!f.dinner, note:f.note||"", updatedAt:f.updatedAt||"" }));
+      Object.entries(state.data.food).forEach(([date, f]) => rows.push({ type:"food", date, breakfast:!!f.breakfast, lunch:!!f.lunch, preworkout:!!f.preworkout, dinner:!!f.dinner, snack:!!f.snack, note:f.note||"", updatedAt:f.updatedAt||"" }));
       return rows;
     }
     function exportData(kind) {
