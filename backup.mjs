@@ -5,7 +5,7 @@ const adapter = globalThis.gymBackupAdapter;
 const read = key => { try { return JSON.parse(localStorage.getItem(key) || 'null'); } catch { return null; } };
 let config = read('sg-backup-config') || {};
 let meta = read('sg-backup-meta') || {};
-let timer, busy = false, message = '', retry = 10000, restoring = false;
+let timer, busy = false, message = '', retry = 10000, restoring = false, connecting = false;
 let selected = null, selectedCurrent = '', snapshots = [], cursor = null;
 const escape = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const configured = () => config.provider === 'github' && !!(config.repository && config.token);
@@ -19,7 +19,11 @@ function status() {
   if (meta.pending) return navigator.onLine ? 'Pending backup' : 'Pending backup · offline';
   return meta.lastAt ? `Backed up ${new Date(meta.lastAt).toLocaleString()}` : 'Ready for first backup';
 }
-function updateStatus() { document.querySelectorAll('[data-backup-status]').forEach(el => el.textContent = status()); }
+function updateStatus() {
+  document.querySelectorAll('[data-backup-status]').forEach(el => el.textContent = status());
+  document.querySelectorAll('[data-backup-connect-status]').forEach(el => el.textContent = connecting ? 'Checking GitHub access…' : status());
+  document.querySelectorAll('[data-backup-connect]').forEach(el => { el.disabled = busy; el.textContent = connecting ? 'Connecting…' : 'Save connection'; });
+}
 function persistMeta() { localStorage.setItem('sg-backup-meta', JSON.stringify(meta)); }
 function schedule(delay = 3000) { clearTimeout(timer); if (configured() && !restoring) timer = setTimeout(() => upload(), Math.max(delay, (Date.parse(meta.lastAt) || 0) + 60000 - Date.now())); }
 function changed() { meta.pending = true; message = ''; persistMeta(); updateStatus(); schedule(); }
@@ -46,7 +50,7 @@ async function upload(force = false) {
 function panelHTML() {
   return `<div class="card stack"><h3>GitHub backup</h3><p class="muted" data-backup-status role="status">${escape(status())}</p>
     <div class="actions"><button class="action primary" data-backup-now ${!configured() ? 'disabled' : ''}>Back up now</button><button class="action" data-backup-list ${!configured() ? 'disabled' : ''}>Browse backups</button></div>
-    <details><summary>Connection settings</summary><div class="stack" style="margin-top:10px"><label>Private backup repository<input data-backup-repository autocapitalize="none" spellcheck="false" placeholder="PunchBala/senthil-gym-backups" value="${escape(config.repository || '')}"></label><label>GitHub access token<input data-backup-token type="password" autocomplete="off" placeholder="${configured() ? 'Leave blank to keep current token' : 'Enter a fine-grained access token'}"></label><p class="mini">Choose only your private backup repository when creating the token, with Contents: read and write. The token stays on this device, outside logs and exports. Connect in the browser that holds your existing history.</p><div class="actions"><button class="action" data-backup-connect>Save connection</button><button class="action" data-backup-disconnect>Disconnect</button></div></div></details>
+    <details ${configured() ? "" : "open"}><summary>Connection settings</summary><div class="stack" style="margin-top:10px"><label>Private backup repository<input data-backup-repository autocapitalize="none" spellcheck="false" placeholder="PunchBala/senthil-gym-backups" value="${escape(config.repository || 'PunchBala/senthil-gym-backups')}"></label><label>GitHub access token<input data-backup-token type="password" autocomplete="off" placeholder="${configured() ? 'Leave blank to keep current token' : 'Enter a fine-grained access token'}"></label><p class="mini">Choose only your private backup repository when creating the token, with Contents: read and write. The token stays on this device, outside logs and exports. Connect in the browser that holds your existing history.</p><div class="actions"><button class="action" data-backup-connect>Save connection</button><button class="action" data-backup-disconnect>Disconnect</button></div><p data-backup-connect-status role="status" class="mini">${escape(status())}</p></div></details>
     <label class="action">Import JSON backup<input data-backup-file type="file" accept=".json,application/json"></label>
     <p class="mini">Saves locally immediately; backs up changes about once a minute while open. Pending changes retry when you reopen or reconnect. Restoring replaces this device’s history; other devices keep their own snapshots.</p>
     <div data-backup-results class="stack"></div></div>`;
@@ -87,9 +91,15 @@ function bind() {
     const token = document.querySelector('[data-backup-token]').value.trim() || (configured() && repository === config.repository ? config.token : '');
     if (!/^github_pat_[a-zA-Z0-9_]{20,}$/.test(token || '')) throw new Error('Enter a fine-grained GitHub access token restricted to your backup repository.');
     const candidate = { provider: 'github', repository, token };
-    busy = true;
+    if (!navigator.onLine) throw new Error('You are offline. Connect to the internet, then tap Save connection again.');
+    busy = true; connecting = true; message = 'Checking GitHub access…'; updateStatus();
     try { await createGitHubBackup(candidate).check(true); localStorage.setItem('sg-backup-config', JSON.stringify(candidate)); config = candidate; }
-    finally { busy = false; }
+    catch (error) {
+      if (error.name === 'TimeoutError' || error.name === 'AbortError') throw new Error('GitHub did not respond within 20 seconds. Check your connection and try again.');
+      if (error instanceof TypeError) throw new Error('Could not reach GitHub. Check your internet connection or content blocker, then try again.');
+      throw error;
+    }
+    finally { busy = false; connecting = false; }
     selected = null; snapshots = []; cursor = null;
     meta.hash = null; meta.lastAt = null; changed(); adapter.render(); await upload();
   }));

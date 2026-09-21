@@ -11,10 +11,16 @@ export function repositoryName(value) {
 function error(message, status) { return Object.assign(new Error(message), { status }); }
 export function createGitHubBackup(config, fetcher = fetch) {
   const base = `https://api.github.com/repos/${repositoryName(config.repository)}`;
+  async function request(url, options) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 20000);
+    try { return await fetcher(url, { ...options, signal: controller.signal }); }
+    finally { clearTimeout(timeout); }
+  }
   async function api(path = '', options = {}) {
-    const response = await fetcher(base + path, {
+    const response = await request(base + path, {
       ...options, cache: 'no-store', credentials: 'omit', redirect: 'error',
-      headers: { Accept: 'application/vnd.github+json', Authorization: `Bearer ${config.token}`, 'X-GitHub-Api-Version': '2022-11-28', ...(options.body ? { 'Content-Type': 'application/json' } : {}) }, signal: AbortSignal.timeout(20000)
+      headers: { Accept: 'application/vnd.github+json', Authorization: `Bearer ${config.token}`, 'X-GitHub-Api-Version': '2022-11-28', ...(options.body ? { 'Content-Type': 'application/json' } : {}) }
     });
     if (!response.ok) {
       if (response.status === 401) throw error('GitHub token expired or was not accepted. Update Connection settings.', 401);
@@ -78,9 +84,9 @@ export function createGitHubBackup(config, fetcher = fetch) {
     if (!SHA.test(ref) || !PATH.test(path)) throw error('Invalid backup reference.', 400);
     await check();
     // Raw Contents API handles files above 1 MB without sending tokens to a download host.
-    const response = await fetcher(base + '/contents/' + path + '?ref=' + ref, {
+    const response = await request(base + '/contents/' + path + '?ref=' + ref, {
       cache: 'no-store', credentials: 'omit', redirect: 'error',
-      headers: { Accept: 'application/vnd.github.raw+json', Authorization: `Bearer ${config.token}`, 'X-GitHub-Api-Version': '2022-11-28' }, signal: AbortSignal.timeout(20000)
+      headers: { Accept: 'application/vnd.github.raw+json', Authorization: `Bearer ${config.token}`, 'X-GitHub-Api-Version': '2022-11-28' }
     });
     if (!response.ok) throw error('Could not download this backup. Check token access and retry.', response.status);
     const text = await response.text();
