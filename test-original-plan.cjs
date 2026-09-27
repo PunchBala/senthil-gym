@@ -44,7 +44,7 @@ assert.equal(b.run('findLatest().week'), 8);
 assert.equal(b.run('state.data.previousPlanWorkouts.w1d1["barbell-squat"].sets[0].weight'), '40');
 // Adaptations do not silently reintroduce known triggers in the second block.
 for (let week=1;week<=8;week++) for (let day=1;day<=5;day++) {
-  const items = a.run(`planDay(${week},${day}).items`);
+  const items = a.run(`adaptedPlanDay(${week},${day}).items`);
   assert.ok(items.every(item => !/arnold|fly|dip|pushdown|clean press|plank|mountain climber|dumbbell|lateral raise|front raise|bench press|push.up/i.test(item.name)));
   assert.equal(new Set(items.map(item=>item.name)).size, items.length);
   if (week <= 2 || week === 5) assert.ok(items.every(item=>item.sets<=2));
@@ -59,13 +59,13 @@ assert.equal(a.run('planDay(5,5).items.some(x=>x.name==="Chest-Supported Machine
 assert.equal(a.run('foodHTML().includes("two-week trial")'), true);
 assert.equal(a.run('workoutHTML().includes("shoulder review pending")'), false);
 a.run(`
-  const progressDay = planDay(3,3);
-  const completed = state.data.workouts[workoutKey(3,3)] = {};
+  const progressDay = planDay(5,3);
+  const completed = state.data.workouts[workoutKey(5,3)] = {};
   progressDay.items.filter(item=>!item.optional).forEach(item=> {
     completed[itemKey(item)] = item.kind === "cardio" ? {done:true} : {sets:[{done:true},{done:true}]};
   });
 `);
-assert.equal(a.run('completedStats(3,3).pct'), 100, 'optional pressing, prehab and third sets must not penalize completion');
+assert.equal(a.run('completedStats(5,3).pct'), 100, 'optional pressing, prehab and third sets must not penalize completion');
 const sourceUser = {...old,planVersion:'original-8-week-v1',previousPlanWorkouts:{w2d1:{'old-exercise':{sets:[{weight:'10'}]}}}};
 const migrated = app(sourceUser);
 assert.deepEqual(migrated.saved().sourcePlanWorkouts, old.workouts);

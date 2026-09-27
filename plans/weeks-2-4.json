@@ -1,0 +1,3709 @@
+{
+  "schemaVersion": 1,
+  "planId": "fat-loss-muscle-retention-w2-w4-v1",
+  "title": "Weeks 2-4 Fat-Loss and Muscle-Retention Block",
+  "status": "proposed",
+  "supersedesPlanId": "adapted-8-week-v2",
+  "weightUnit": "kg",
+  "startDate": null,
+  "durationWeeks": 3,
+  "weekMapping": {
+    "newPlanWeek1": "Previous training Week 2",
+    "newPlanWeek2": "Previous training Week 3",
+    "newPlanWeek3": "Previous training Week 4"
+  },
+  "context": {
+    "goals": [
+      "Continue fat loss while nutrition is managed separately.",
+      "Preserve or regain muscle and strength during the calorie deficit.",
+      "Train at the gym every weekday.",
+      "Keep each gym visit approximately 60 minutes or less.",
+      "Train core at the beginning of every gym session.",
+      "Restore balanced whole-body muscle coverage.",
+      "Avoid unnecessarily high-impact or high-fatigue conditioning."
+    ],
+    "confirmedHistory": [
+      "Body weight reported as 106 kg before this block.",
+      "Four consecutive gym sessions were completed in the preceding Week 1.",
+      "All prescribed repetitions were reported completed with clean form.",
+      "Most Week 1 sets were conservative with more than 2-3 repetitions in reserve.",
+      "Following-day soreness was ordinary and not severe.",
+      "No accumulating leg or back fatigue was reported.",
+      "Left shoulder symptoms have no confirmed diagnosis.",
+      "Chest pressing and 35 kg neutral-grip lat pulldown produced at most slight front-left-shoulder tightness or awareness rather than pain.",
+      "The shoulder sensation disappeared essentially immediately.",
+      "No later-day or next-morning shoulder symptoms were reported.",
+      "Normal daily shoulder movement remained fine.",
+      "Frequent core work was a valued feature of previously successful programmes."
+    ],
+    "assumptions": [
+      "Standard cable, selectorised resistance and cardio equipment are available.",
+      "Exact Alton Leisure Centre machine inventory has not been verified.",
+      "Machine-displayed weights are not assumed comparable between different machine models.",
+      "Nutrition is managed separately and is not modified by this prescription."
+    ],
+    "unknowns": [
+      "Exact diagnosis or tissue source of historical left-shoulder symptoms.",
+      "Exact machine inventory and machine models.",
+      "Starting loads for newly introduced exercises.",
+      "Longer-term shoulder response to repeated pressing, vertical pulling and lateral-raise exposure."
+    ],
+    "constraints": [
+      "Approximately 60 minutes per weekday visit.",
+      "No burpees.",
+      "No jumping lunges.",
+      "No mandatory HIIT.",
+      "No loaded overhead pressing during this block.",
+      "Do not diagnose the shoulder from exercise response."
+    ]
+  },
+  "generalRules": {
+    "effortTarget": "Plan Week 1: mostly 2-3 RIR. Plan Week 2: about 2 RIR. Plan Week 3: 1-2 RIR on established symptom-free exercises. Shoulder-sensitive exercises remain at 2 or more RIR.",
+    "loadSelection": "SuggestedKg values are starting anchors from previous logs, not compulsory loads. For null suggestedKg choose a conservative load that reaches the prescribed repetition range at the prescribed RIR. Never interpret null as 0 kg.",
+    "progression": [
+      "Use double progression: increase repetitions within the prescribed range before increasing weight.",
+      "When every working set reaches the top of its repetition range with the prescribed RIR and clean technique on two exposures, increase by the smallest available load increment.",
+      "After increasing weight, repetitions may return toward the bottom of the range.",
+      "Do not automatically increase weight every week.",
+      "Do not progress a shoulder-sensitive movement unless its during-session and next-day response remain acceptable."
+    ],
+    "regression": [
+      "If prescribed RIR cannot be maintained with clean technique, reduce the load.",
+      "If recovery deteriorates materially, hold progression before removing volume.",
+      "If necessary after holding progression, remove one working set from the affected muscle group.",
+      "If an exercise remains uncomfortable despite load and range adjustment, use its listed alternative."
+    ],
+    "symptomStopRules": [
+      "Stop the provoking movement for sharp pain, increasing discomfort, unexpected weakness, instability, painful catching, numbness or tingling.",
+      "The historical 3/10 pain ceiling is not a target or proof of safety.",
+      "Brief non-painful shoulder awareness or tightness that does not increase may be logged and managed by reducing load or range.",
+      "Do not progress a movement while its shoulder response is worsening."
+    ],
+    "nextDayResponseRules": [
+      "Shoulder symptoms should be no worse the following morning.",
+      "If an exercise causes a clear later-day or next-morning flare, regress or omit it at the next exposure.",
+      "Seek physiotherapy or MSK assessment if shoulder pain returns, persists, progressively worsens or causes weakness or loss of function."
+    ],
+    "missedSessionRules": [
+      "Do not double sessions to catch up.",
+      "Resume with the next session in sequence.",
+      "Preserve Upper A, Lower A, lower-fatigue Wednesday, Upper B, Lower B ordering where practical.",
+      "A missed Wednesday session does not need to be made up at the weekend."
+    ],
+    "trackingFieldsRequired": [
+      "completed",
+      "reps",
+      "weightKg",
+      "rir",
+      "shoulderSensation0to10",
+      "note"
+    ],
+    "timeRule": "If the session approaches 60 minutes, shorten post-lifting cardio before removing required resistance work.",
+    "coreRule": "Core work at the beginning is a primer and direct training stimulus, not a failure circuit. Preserve approximately 3-4 RIR so it does not compromise the main lifts."
+  },
+  "weeks": [
+    {
+      "week": 1,
+      "title": "Establish Working Loads",
+      "guidance": "Corresponds to previous training Week 2. Use preceding Week 1 loads as anchors. Increase training quality and muscle coverage without chasing weight increases.",
+      "schedule": {
+        "requiredSessionIds": [
+          "session-1",
+          "session-2",
+          "session-3",
+          "session-4",
+          "session-5"
+        ],
+        "optionalSessionIds": [],
+        "spacingInstructions": "Suggested Monday-Friday order. Session 3 is deliberately lower-fatigue.",
+        "restDayInstructions": "Weekend recovery and normal walking. Easy recreational activity is optional."
+      },
+      "sessions": [
+        {
+          "sessionId": "session-1",
+          "title": "Upper A + Core",
+          "type": "strength",
+          "optional": false,
+          "suggestedDay": "Monday",
+          "estimatedDurationMinutes": 60,
+          "warmup": [
+            {
+              "instruction": "Easy treadmill walk or stationary bike",
+              "durationSeconds": 300,
+              "repetitions": null
+            },
+            {
+              "instruction": "Gentle shoulder rotations in comfortable range",
+              "durationSeconds": null,
+              "repetitions": 5
+            },
+            {
+              "instruction": "Perform 1-2 progressively loaded practice sets before the first chest-press working set",
+              "durationSeconds": null,
+              "repetitions": null
+            }
+          ],
+          "exercises": [
+            {
+              "exerciseId": "reverse-crunch",
+              "name": "Reverse Crunch",
+              "kind": "core",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                3,
+                4
+              ],
+              "load": {
+                "mode": "bodyweight",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              }
+            },
+            {
+              "exerciseId": "neutral-grip-machine-chest-press",
+              "name": "Neutral-Grip Machine Chest Press",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 12,
+                "perSide": false
+              },
+              "restSeconds": [
+                90,
+                120
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": 40,
+                "basis": "machine-displayed"
+              },
+              "formCues": [
+                "Elbows slightly tucked.",
+                "Controlled lowering.",
+                "Use comfortable shoulder range."
+              ]
+            },
+            {
+              "exerciseId": "seated-cable-row",
+              "name": "Seated Cable Row",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 12,
+                "perSide": false
+              },
+              "restSeconds": [
+                90,
+                120
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": 30,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "neutral-grip-lat-pulldown",
+              "name": "Neutral-Grip Lat Pulldown",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 12,
+                "perSide": false
+              },
+              "restSeconds": [
+                90,
+                120
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": 35,
+                "basis": "machine-displayed"
+              },
+              "formCues": [
+                "Pull in front of the body.",
+                "Do not use behind-neck pulling.",
+                "Do not force overhead range."
+              ]
+            },
+            {
+              "exerciseId": "cable-lateral-raise",
+              "name": "Cable Lateral Raise",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 12,
+                "repsMax": 15,
+                "perSide": true
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              },
+              "formCues": [
+                "Start very light.",
+                "Use a comfortable arc.",
+                "Do not force shoulder height."
+              ],
+              "alternatives": [
+                {
+                  "exerciseId": "machine-lateral-raise",
+                  "name": "Machine Lateral Raise",
+                  "whenToUse": "Use if cable setup is unavailable or the machine feels more stable.",
+                  "prescription": "2 x 12-15 at 2-3 RIR."
+                }
+              ]
+            },
+            {
+              "exerciseId": "rope-triceps-pressdown",
+              "name": "Rope Triceps Pressdown",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "cable-bicep-curl",
+              "name": "Cable Biceps Curl",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              },
+              "alternatives": [
+                {
+                  "exerciseId": "barbell-bicep-curl",
+                  "name": "Barbell Bicep Curl",
+                  "whenToUse": "Use if cable station is unavailable and front of shoulder remains comfortable.",
+                  "prescription": "2 x 10-15 at 2-3 RIR."
+                }
+              ]
+            },
+            {
+              "exerciseId": "treadmill-walk",
+              "name": "Treadmill Walk",
+              "kind": "cardio",
+              "optional": false,
+              "sets": 1,
+              "target": {
+                "durationSecondsMin": 480,
+                "durationSecondsMax": 480,
+                "perSide": false
+              },
+              "restSeconds": [
+                0,
+                0
+              ],
+              "rir": [
+                null,
+                null
+              ],
+              "load": {
+                "mode": "none",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              },
+              "intensityInstruction": "Brisk but conversational pace. Do not lean on the handles."
+            }
+          ],
+          "cooldown": [
+            {
+              "instruction": "Easy walking and relaxed breathing",
+              "durationSeconds": 120,
+              "repetitions": null
+            }
+          ]
+        },
+        {
+          "sessionId": "session-2",
+          "title": "Lower A + Core",
+          "type": "strength",
+          "optional": false,
+          "suggestedDay": "Tuesday",
+          "estimatedDurationMinutes": 60,
+          "warmup": [
+            {
+              "instruction": "Easy treadmill walk or stationary bike",
+              "durationSeconds": 300,
+              "repetitions": null
+            },
+            {
+              "instruction": "Perform 1-2 light practice sets before leg press and Romanian deadlift as needed",
+              "durationSeconds": null,
+              "repetitions": null
+            }
+          ],
+          "exercises": [
+            {
+              "exerciseId": "supine-heel-taps",
+              "name": "Supine Heel Taps",
+              "kind": "core",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 12,
+                "perSide": true
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                3,
+                4
+              ],
+              "load": {
+                "mode": "bodyweight",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              }
+            },
+            {
+              "exerciseId": "leg-press",
+              "name": "Leg Press",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 12,
+                "perSide": false
+              },
+              "restSeconds": [
+                90,
+                120
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": 80,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "barbell-romanian-deadlift",
+              "name": "Barbell Romanian Deadlift",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 10,
+                "perSide": false
+              },
+              "restSeconds": [
+                120,
+                150
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": 30,
+                "basis": "total-including-bar"
+              }
+            },
+            {
+              "exerciseId": "leg-extension",
+              "name": "Leg Extension",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                60,
+                90
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": 30,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "seated-leg-curl",
+              "name": "Seated Leg Curl",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                60,
+                90
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": 35,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "calf-raise",
+              "name": "Calf Raise",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 12,
+                "repsMax": 20,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "unknown"
+              },
+              "formCues": [
+                "Use a setup that does not require uncomfortable shoulder-pad loading."
+              ]
+            },
+            {
+              "exerciseId": "stationary-bike",
+              "name": "Stationary Bike",
+              "kind": "cardio",
+              "optional": false,
+              "sets": 1,
+              "target": {
+                "durationSecondsMin": 480,
+                "durationSecondsMax": 480,
+                "perSide": false
+              },
+              "restSeconds": [
+                0,
+                0
+              ],
+              "rir": [
+                null,
+                null
+              ],
+              "load": {
+                "mode": "none",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              },
+              "intensityInstruction": "Moderate conversational effort with shoulders relaxed."
+            }
+          ],
+          "cooldown": [
+            {
+              "instruction": "Easy walking and relaxed breathing",
+              "durationSeconds": 120,
+              "repetitions": null
+            }
+          ]
+        },
+        {
+          "sessionId": "session-3",
+          "title": "Core + Accessories + Conditioning",
+          "type": "strength",
+          "optional": false,
+          "suggestedDay": "Wednesday",
+          "estimatedDurationMinutes": 50,
+          "warmup": [
+            {
+              "instruction": "Easy walking or cycling",
+              "durationSeconds": 300,
+              "repetitions": null
+            },
+            {
+              "instruction": "Gentle shoulder rotations in comfortable range",
+              "durationSeconds": null,
+              "repetitions": 5
+            }
+          ],
+          "exercises": [
+            {
+              "exerciseId": "reverse-crunch",
+              "name": "Reverse Crunch",
+              "kind": "core",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                3,
+                4
+              ],
+              "load": {
+                "mode": "bodyweight",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              }
+            },
+            {
+              "exerciseId": "supine-heel-slide",
+              "name": "Supine Heel Slide",
+              "kind": "core",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 12,
+                "perSide": true
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                3,
+                4
+              ],
+              "load": {
+                "mode": "bodyweight",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              }
+            },
+            {
+              "exerciseId": "light-band-external-rotation",
+              "name": "Light Band External Rotation",
+              "kind": "mobility",
+              "optional": true,
+              "sets": 1,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 12,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                4,
+                5
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "unknown"
+              }
+            },
+            {
+              "exerciseId": "reverse-pec-deck",
+              "name": "Reverse Pec Deck",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 12,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                3,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "rope-triceps-pressdown",
+              "name": "Rope Triceps Pressdown",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "cable-bicep-curl",
+              "name": "Cable Biceps Curl",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "calf-raise",
+              "name": "Calf Raise",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 12,
+                "repsMax": 20,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "unknown"
+              }
+            },
+            {
+              "exerciseId": "stationary-bike",
+              "name": "Stationary Bike",
+              "kind": "cardio",
+              "optional": false,
+              "sets": 1,
+              "target": {
+                "durationSecondsMin": 1200,
+                "durationSecondsMax": 1200,
+                "perSide": false
+              },
+              "restSeconds": [
+                0,
+                0
+              ],
+              "rir": [
+                null,
+                null
+              ],
+              "load": {
+                "mode": "none",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              },
+              "intensityInstruction": "Easy-to-moderate steady effort. This is not HIIT."
+            }
+          ],
+          "cooldown": [
+            {
+              "instruction": "Easy walking and relaxed breathing",
+              "durationSeconds": 120,
+              "repetitions": null
+            }
+          ]
+        },
+        {
+          "sessionId": "session-4",
+          "title": "Upper B + Core",
+          "type": "strength",
+          "optional": false,
+          "suggestedDay": "Thursday",
+          "estimatedDurationMinutes": 60,
+          "warmup": [
+            {
+              "instruction": "Easy treadmill walk or stationary bike",
+              "durationSeconds": 300,
+              "repetitions": null
+            },
+            {
+              "instruction": "Gentle shoulder rotations in comfortable range",
+              "durationSeconds": null,
+              "repetitions": 5
+            },
+            {
+              "instruction": "Perform 1-2 progressively loaded practice sets before chest press",
+              "durationSeconds": null,
+              "repetitions": null
+            }
+          ],
+          "exercises": [
+            {
+              "exerciseId": "supine-heel-taps",
+              "name": "Supine Heel Taps",
+              "kind": "core",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 12,
+                "perSide": true
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                3,
+                4
+              ],
+              "load": {
+                "mode": "bodyweight",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              }
+            },
+            {
+              "exerciseId": "neutral-grip-machine-chest-press",
+              "name": "Neutral-Grip Machine Chest Press",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 12,
+                "perSide": false
+              },
+              "restSeconds": [
+                90,
+                120
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": 40,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "chest-supported-machine-row",
+              "name": "Chest-Supported Machine Row",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 12,
+                "perSide": false
+              },
+              "restSeconds": [
+                90,
+                120
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              },
+              "alternatives": [
+                {
+                  "exerciseId": "seated-cable-row",
+                  "name": "Seated Cable Row",
+                  "whenToUse": "Use if no suitable chest-supported row exists.",
+                  "prescription": "2 x 8-12 at 2-3 RIR; previous 30 kg row is the starting anchor."
+                }
+              ]
+            },
+            {
+              "exerciseId": "neutral-grip-lat-pulldown",
+              "name": "Neutral-Grip Lat Pulldown",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 12,
+                "perSide": false
+              },
+              "restSeconds": [
+                90,
+                120
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": 35,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "reverse-pec-deck",
+              "name": "Reverse Pec Deck",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 12,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "cable-lateral-raise",
+              "name": "Cable Lateral Raise",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 12,
+                "repsMax": 15,
+                "perSide": true
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              },
+              "alternatives": [
+                {
+                  "exerciseId": "machine-lateral-raise",
+                  "name": "Machine Lateral Raise",
+                  "whenToUse": "Use if more comfortable or convenient.",
+                  "prescription": "2 x 12-15 at 2-3 RIR."
+                }
+              ]
+            },
+            {
+              "exerciseId": "rope-triceps-pressdown",
+              "name": "Rope Triceps Pressdown",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "cable-bicep-curl",
+              "name": "Cable Biceps Curl",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "treadmill-walk",
+              "name": "Treadmill Walk",
+              "kind": "cardio",
+              "optional": false,
+              "sets": 1,
+              "target": {
+                "durationSecondsMin": 480,
+                "durationSecondsMax": 480,
+                "perSide": false
+              },
+              "restSeconds": [
+                0,
+                0
+              ],
+              "rir": [
+                null,
+                null
+              ],
+              "load": {
+                "mode": "none",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              },
+              "intensityInstruction": "Brisk conversational pace."
+            }
+          ],
+          "cooldown": [
+            {
+              "instruction": "Easy walking and relaxed breathing",
+              "durationSeconds": 120,
+              "repetitions": null
+            }
+          ]
+        },
+        {
+          "sessionId": "session-5",
+          "title": "Lower B + Core",
+          "type": "strength",
+          "optional": false,
+          "suggestedDay": "Friday",
+          "estimatedDurationMinutes": 60,
+          "warmup": [
+            {
+              "instruction": "Easy treadmill walk or stationary bike",
+              "durationSeconds": 300,
+              "repetitions": null
+            },
+            {
+              "instruction": "Perform light practice sets before the first loaded lower-body exercise",
+              "durationSeconds": null,
+              "repetitions": null
+            }
+          ],
+          "exercises": [
+            {
+              "exerciseId": "reverse-crunch",
+              "name": "Reverse Crunch",
+              "kind": "core",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                3,
+                4
+              ],
+              "load": {
+                "mode": "bodyweight",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              }
+            },
+            {
+              "exerciseId": "belt-squat",
+              "name": "Belt Squat",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 12,
+                "perSide": false
+              },
+              "restSeconds": [
+                90,
+                120
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              },
+              "alternatives": [
+                {
+                  "exerciseId": "leg-press",
+                  "name": "Leg Press",
+                  "whenToUse": "Default alternative if no belt-squat machine exists.",
+                  "prescription": "2 x 8-12 at 2-3 RIR. Previous 80 kg leg-press load is an anchor."
+                },
+                {
+                  "exerciseId": "bodyweight-squat",
+                  "name": "Bodyweight Squat",
+                  "whenToUse": "Use if neither machine option is available or comfortable.",
+                  "prescription": "2 x 12-20 at 2-3 RIR."
+                }
+              ]
+            },
+            {
+              "exerciseId": "reverse-lunge",
+              "name": "Reverse Lunge",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 10,
+                "perSide": true
+              },
+              "restSeconds": [
+                75,
+                90
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "bodyweight",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              },
+              "alternatives": [
+                {
+                  "exerciseId": "forward-lunge",
+                  "name": "Forward Lunge",
+                  "whenToUse": "Use if preferred and equally stable and comfortable at knees and hips.",
+                  "prescription": "2 x 8-10 per side at 2-3 RIR, initially bodyweight."
+                }
+              ]
+            },
+            {
+              "exerciseId": "seated-leg-curl",
+              "name": "Seated Leg Curl",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                60,
+                90
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": 35,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "leg-extension",
+              "name": "Leg Extension",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                60,
+                90
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": 30,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "calf-raise",
+              "name": "Calf Raise",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 12,
+                "repsMax": 20,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "unknown"
+              }
+            },
+            {
+              "exerciseId": "stationary-bike",
+              "name": "Stationary Bike",
+              "kind": "cardio",
+              "optional": false,
+              "sets": 1,
+              "target": {
+                "durationSecondsMin": 480,
+                "durationSecondsMax": 480,
+                "perSide": false
+              },
+              "restSeconds": [
+                0,
+                0
+              ],
+              "rir": [
+                null,
+                null
+              ],
+              "load": {
+                "mode": "none",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              },
+              "intensityInstruction": "Moderate conversational effort."
+            }
+          ],
+          "cooldown": [
+            {
+              "instruction": "Easy walking and relaxed breathing",
+              "durationSeconds": 120,
+              "repetitions": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 2,
+      "title": "Build Volume",
+      "guidance": "Corresponds to previous training Week 3. Main compound and machine movements increase to three working sets. Target approximately 2 RIR. Do not increase load merely because sets increased.",
+      "schedule": {
+        "requiredSessionIds": [
+          "session-1",
+          "session-2",
+          "session-3",
+          "session-4",
+          "session-5"
+        ],
+        "optionalSessionIds": [],
+        "spacingInstructions": "Monday-Friday. Wednesday remains deliberately lower-fatigue.",
+        "restDayInstructions": "Weekend recovery and normal walking."
+      },
+      "sessions": [
+        {
+          "sessionId": "session-1",
+          "title": "Upper A + Core",
+          "type": "strength",
+          "optional": false,
+          "suggestedDay": "Monday",
+          "estimatedDurationMinutes": 60,
+          "warmup": [
+            {
+              "instruction": "Easy treadmill or bike",
+              "durationSeconds": 300,
+              "repetitions": null
+            },
+            {
+              "instruction": "Gentle shoulder rotations",
+              "durationSeconds": null,
+              "repetitions": 5
+            },
+            {
+              "instruction": "1-2 practice sets before chest press",
+              "durationSeconds": null,
+              "repetitions": null
+            }
+          ],
+          "exercises": [
+            {
+              "exerciseId": "reverse-crunch",
+              "name": "Reverse Crunch",
+              "kind": "core",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                3,
+                4
+              ],
+              "load": {
+                "mode": "bodyweight",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              }
+            },
+            {
+              "exerciseId": "neutral-grip-machine-chest-press",
+              "name": "Neutral-Grip Machine Chest Press",
+              "kind": "strength",
+              "optional": false,
+              "sets": 3,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 12,
+                "perSide": false
+              },
+              "restSeconds": [
+                90,
+                120
+              ],
+              "rir": [
+                2,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": 40,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "seated-cable-row",
+              "name": "Seated Cable Row",
+              "kind": "strength",
+              "optional": false,
+              "sets": 3,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 12,
+                "perSide": false
+              },
+              "restSeconds": [
+                90,
+                120
+              ],
+              "rir": [
+                2,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": 30,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "neutral-grip-lat-pulldown",
+              "name": "Neutral-Grip Lat Pulldown",
+              "kind": "strength",
+              "optional": false,
+              "sets": 3,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 12,
+                "perSide": false
+              },
+              "restSeconds": [
+                90,
+                120
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": 35,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "cable-lateral-raise",
+              "name": "Cable Lateral Raise",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 12,
+                "repsMax": 15,
+                "perSide": true
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              },
+              "alternatives": [
+                {
+                  "exerciseId": "machine-lateral-raise",
+                  "name": "Machine Lateral Raise",
+                  "whenToUse": "Cable unavailable or machine more comfortable.",
+                  "prescription": "2 x 12-15 at 2-3 RIR."
+                }
+              ]
+            },
+            {
+              "exerciseId": "rope-triceps-pressdown",
+              "name": "Rope Triceps Pressdown",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "cable-bicep-curl",
+              "name": "Cable Biceps Curl",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "treadmill-walk",
+              "name": "Treadmill Walk",
+              "kind": "cardio",
+              "optional": false,
+              "sets": 1,
+              "target": {
+                "durationSecondsMin": 600,
+                "durationSecondsMax": 600,
+                "perSide": false
+              },
+              "restSeconds": [
+                0,
+                0
+              ],
+              "rir": [
+                null,
+                null
+              ],
+              "load": {
+                "mode": "none",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              },
+              "intensityInstruction": "Brisk conversational pace."
+            }
+          ],
+          "cooldown": [
+            {
+              "instruction": "Easy walking and breathing",
+              "durationSeconds": 120,
+              "repetitions": null
+            }
+          ]
+        },
+        {
+          "sessionId": "session-2",
+          "title": "Lower A + Core",
+          "type": "strength",
+          "optional": false,
+          "suggestedDay": "Tuesday",
+          "estimatedDurationMinutes": 60,
+          "warmup": [
+            {
+              "instruction": "Easy treadmill or bike",
+              "durationSeconds": 300,
+              "repetitions": null
+            }
+          ],
+          "exercises": [
+            {
+              "exerciseId": "supine-heel-taps",
+              "name": "Supine Heel Taps",
+              "kind": "core",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 12,
+                "perSide": true
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                3,
+                4
+              ],
+              "load": {
+                "mode": "bodyweight",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              }
+            },
+            {
+              "exerciseId": "leg-press",
+              "name": "Leg Press",
+              "kind": "strength",
+              "optional": false,
+              "sets": 3,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 12,
+                "perSide": false
+              },
+              "restSeconds": [
+                90,
+                120
+              ],
+              "rir": [
+                2,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": 80,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "barbell-romanian-deadlift",
+              "name": "Barbell Romanian Deadlift",
+              "kind": "strength",
+              "optional": false,
+              "sets": 3,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 10,
+                "perSide": false
+              },
+              "restSeconds": [
+                120,
+                150
+              ],
+              "rir": [
+                2,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": 30,
+                "basis": "total-including-bar"
+              }
+            },
+            {
+              "exerciseId": "leg-extension",
+              "name": "Leg Extension",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                60,
+                90
+              ],
+              "rir": [
+                2,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "seated-leg-curl",
+              "name": "Seated Leg Curl",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                60,
+                90
+              ],
+              "rir": [
+                2,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": 35,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "calf-raise",
+              "name": "Calf Raise",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 12,
+                "repsMax": 20,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "unknown"
+              }
+            },
+            {
+              "exerciseId": "stationary-bike",
+              "name": "Stationary Bike",
+              "kind": "cardio",
+              "optional": false,
+              "sets": 1,
+              "target": {
+                "durationSecondsMin": 600,
+                "durationSecondsMax": 600,
+                "perSide": false
+              },
+              "restSeconds": [
+                0,
+                0
+              ],
+              "rir": [
+                null,
+                null
+              ],
+              "load": {
+                "mode": "none",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              },
+              "intensityInstruction": "Moderate conversational effort."
+            }
+          ],
+          "cooldown": [
+            {
+              "instruction": "Easy walking and breathing",
+              "durationSeconds": 120,
+              "repetitions": null
+            }
+          ]
+        },
+        {
+          "sessionId": "session-3",
+          "title": "Core + Accessories + Conditioning",
+          "type": "strength",
+          "optional": false,
+          "suggestedDay": "Wednesday",
+          "estimatedDurationMinutes": 55,
+          "warmup": [
+            {
+              "instruction": "Easy walking or cycling",
+              "durationSeconds": 300,
+              "repetitions": null
+            }
+          ],
+          "exercises": [
+            {
+              "exerciseId": "reverse-crunch",
+              "name": "Reverse Crunch",
+              "kind": "core",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                3,
+                4
+              ],
+              "load": {
+                "mode": "bodyweight",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              }
+            },
+            {
+              "exerciseId": "supine-heel-slide",
+              "name": "Supine Heel Slide",
+              "kind": "core",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 12,
+                "perSide": true
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                3,
+                4
+              ],
+              "load": {
+                "mode": "bodyweight",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              }
+            },
+            {
+              "exerciseId": "light-band-external-rotation",
+              "name": "Light Band External Rotation",
+              "kind": "mobility",
+              "optional": true,
+              "sets": 1,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 12,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                4,
+                5
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "unknown"
+              }
+            },
+            {
+              "exerciseId": "reverse-pec-deck",
+              "name": "Reverse Pec Deck",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 12,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                3,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "rope-triceps-pressdown",
+              "name": "Rope Triceps Pressdown",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "cable-bicep-curl",
+              "name": "Cable Biceps Curl",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "calf-raise",
+              "name": "Calf Raise",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 12,
+                "repsMax": 20,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "unknown"
+              }
+            },
+            {
+              "exerciseId": "stationary-bike",
+              "name": "Stationary Bike",
+              "kind": "cardio",
+              "optional": false,
+              "sets": 1,
+              "target": {
+                "durationSecondsMin": 1500,
+                "durationSecondsMax": 1500,
+                "perSide": false
+              },
+              "restSeconds": [
+                0,
+                0
+              ],
+              "rir": [
+                null,
+                null
+              ],
+              "load": {
+                "mode": "none",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              },
+              "intensityInstruction": "Easy-to-moderate steady effort; not HIIT."
+            }
+          ],
+          "cooldown": [
+            {
+              "instruction": "Easy walking and breathing",
+              "durationSeconds": 120,
+              "repetitions": null
+            }
+          ]
+        },
+        {
+          "sessionId": "session-4",
+          "title": "Upper B + Core",
+          "type": "strength",
+          "optional": false,
+          "suggestedDay": "Thursday",
+          "estimatedDurationMinutes": 60,
+          "warmup": [
+            {
+              "instruction": "Easy treadmill or bike plus shoulder rotations",
+              "durationSeconds": 300,
+              "repetitions": null
+            }
+          ],
+          "exercises": [
+            {
+              "exerciseId": "supine-heel-taps",
+              "name": "Supine Heel Taps",
+              "kind": "core",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 12,
+                "perSide": true
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                3,
+                4
+              ],
+              "load": {
+                "mode": "bodyweight",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              }
+            },
+            {
+              "exerciseId": "neutral-grip-machine-chest-press",
+              "name": "Neutral-Grip Machine Chest Press",
+              "kind": "strength",
+              "optional": false,
+              "sets": 3,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 12,
+                "perSide": false
+              },
+              "restSeconds": [
+                90,
+                120
+              ],
+              "rir": [
+                2,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": 40,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "chest-supported-machine-row",
+              "name": "Chest-Supported Machine Row",
+              "kind": "strength",
+              "optional": false,
+              "sets": 3,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 12,
+                "perSide": false
+              },
+              "restSeconds": [
+                90,
+                120
+              ],
+              "rir": [
+                2,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              },
+              "alternatives": [
+                {
+                  "exerciseId": "seated-cable-row",
+                  "name": "Seated Cable Row",
+                  "whenToUse": "No suitable chest-supported machine.",
+                  "prescription": "3 x 8-12 at 2 RIR."
+                }
+              ]
+            },
+            {
+              "exerciseId": "neutral-grip-lat-pulldown",
+              "name": "Neutral-Grip Lat Pulldown",
+              "kind": "strength",
+              "optional": false,
+              "sets": 3,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 12,
+                "perSide": false
+              },
+              "restSeconds": [
+                90,
+                120
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": 35,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "reverse-pec-deck",
+              "name": "Reverse Pec Deck",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 12,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "cable-lateral-raise",
+              "name": "Cable Lateral Raise",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 12,
+                "repsMax": 15,
+                "perSide": true
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              },
+              "alternatives": [
+                {
+                  "exerciseId": "machine-lateral-raise",
+                  "name": "Machine Lateral Raise",
+                  "whenToUse": "More comfortable or convenient.",
+                  "prescription": "2 x 12-15 at 2-3 RIR."
+                }
+              ]
+            },
+            {
+              "exerciseId": "rope-triceps-pressdown",
+              "name": "Rope Triceps Pressdown",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "cable-bicep-curl",
+              "name": "Cable Biceps Curl",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "treadmill-walk",
+              "name": "Treadmill Walk",
+              "kind": "cardio",
+              "optional": false,
+              "sets": 1,
+              "target": {
+                "durationSecondsMin": 600,
+                "durationSecondsMax": 600,
+                "perSide": false
+              },
+              "restSeconds": [
+                0,
+                0
+              ],
+              "rir": [
+                null,
+                null
+              ],
+              "load": {
+                "mode": "none",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              },
+              "intensityInstruction": "Brisk conversational pace."
+            }
+          ],
+          "cooldown": [
+            {
+              "instruction": "Easy walking and breathing",
+              "durationSeconds": 120,
+              "repetitions": null
+            }
+          ]
+        },
+        {
+          "sessionId": "session-5",
+          "title": "Lower B + Core",
+          "type": "strength",
+          "optional": false,
+          "suggestedDay": "Friday",
+          "estimatedDurationMinutes": 60,
+          "warmup": [
+            {
+              "instruction": "Easy treadmill or bike",
+              "durationSeconds": 300,
+              "repetitions": null
+            }
+          ],
+          "exercises": [
+            {
+              "exerciseId": "reverse-crunch",
+              "name": "Reverse Crunch",
+              "kind": "core",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                3,
+                4
+              ],
+              "load": {
+                "mode": "bodyweight",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              }
+            },
+            {
+              "exerciseId": "belt-squat",
+              "name": "Belt Squat",
+              "kind": "strength",
+              "optional": false,
+              "sets": 3,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 12,
+                "perSide": false
+              },
+              "restSeconds": [
+                90,
+                120
+              ],
+              "rir": [
+                2,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              },
+              "alternatives": [
+                {
+                  "exerciseId": "leg-press",
+                  "name": "Leg Press",
+                  "whenToUse": "No belt squat.",
+                  "prescription": "3 x 8-12 at 2 RIR."
+                },
+                {
+                  "exerciseId": "bodyweight-squat",
+                  "name": "Bodyweight Squat",
+                  "whenToUse": "No comfortable machine option.",
+                  "prescription": "3 x 12-20 at 2 RIR."
+                }
+              ]
+            },
+            {
+              "exerciseId": "reverse-lunge",
+              "name": "Reverse Lunge",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 10,
+                "perSide": true
+              },
+              "restSeconds": [
+                75,
+                90
+              ],
+              "rir": [
+                2,
+                2
+              ],
+              "load": {
+                "mode": "bodyweight",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              },
+              "alternatives": [
+                {
+                  "exerciseId": "forward-lunge",
+                  "name": "Forward Lunge",
+                  "whenToUse": "Preferred and equally comfortable.",
+                  "prescription": "2 x 8-10 per side at 2 RIR."
+                }
+              ]
+            },
+            {
+              "exerciseId": "seated-leg-curl",
+              "name": "Seated Leg Curl",
+              "kind": "strength",
+              "optional": false,
+              "sets": 3,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                60,
+                90
+              ],
+              "rir": [
+                2,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": 35,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "leg-extension",
+              "name": "Leg Extension",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                60,
+                90
+              ],
+              "rir": [
+                2,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "calf-raise",
+              "name": "Calf Raise",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 12,
+                "repsMax": 20,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "unknown"
+              }
+            },
+            {
+              "exerciseId": "stationary-bike",
+              "name": "Stationary Bike",
+              "kind": "cardio",
+              "optional": false,
+              "sets": 1,
+              "target": {
+                "durationSecondsMin": 600,
+                "durationSecondsMax": 600,
+                "perSide": false
+              },
+              "restSeconds": [
+                0,
+                0
+              ],
+              "rir": [
+                null,
+                null
+              ],
+              "load": {
+                "mode": "none",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              },
+              "intensityInstruction": "Moderate conversational effort."
+            }
+          ],
+          "cooldown": [
+            {
+              "instruction": "Easy walking and breathing",
+              "durationSeconds": 120,
+              "repetitions": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "week": 3,
+      "title": "Consolidate and Progress",
+      "guidance": "Corresponds to previous training Week 4. Keep three working sets on main movements. Progress repetitions and then load only where technique, recovery and shoulder response support it. Established symptom-free exercises may reach 1-2 RIR; shoulder-sensitive movements remain at 2 or more RIR.",
+      "schedule": {
+        "requiredSessionIds": [
+          "session-1",
+          "session-2",
+          "session-3",
+          "session-4",
+          "session-5"
+        ],
+        "optionalSessionIds": [],
+        "spacingInstructions": "Monday-Friday. Wednesday remains lower-fatigue.",
+        "restDayInstructions": "Weekend recovery and normal walking."
+      },
+      "sessions": [
+        {
+          "sessionId": "session-1",
+          "title": "Upper A + Core",
+          "type": "strength",
+          "optional": false,
+          "suggestedDay": "Monday",
+          "estimatedDurationMinutes": 60,
+          "warmup": [
+            {
+              "instruction": "Easy cardio, shoulder rotations and 1-2 chest-press practice sets",
+              "durationSeconds": 300,
+              "repetitions": null
+            }
+          ],
+          "exercises": [
+            {
+              "exerciseId": "reverse-crunch",
+              "name": "Reverse Crunch",
+              "kind": "core",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                3,
+                4
+              ],
+              "load": {
+                "mode": "bodyweight",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              }
+            },
+            {
+              "exerciseId": "neutral-grip-machine-chest-press",
+              "name": "Neutral-Grip Machine Chest Press",
+              "kind": "strength",
+              "optional": false,
+              "sets": 3,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 12,
+                "perSide": false
+              },
+              "restSeconds": [
+                90,
+                120
+              ],
+              "rir": [
+                2,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": 40,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "seated-cable-row",
+              "name": "Seated Cable Row",
+              "kind": "strength",
+              "optional": false,
+              "sets": 3,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 12,
+                "perSide": false
+              },
+              "restSeconds": [
+                90,
+                120
+              ],
+              "rir": [
+                1,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": 30,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "neutral-grip-lat-pulldown",
+              "name": "Neutral-Grip Lat Pulldown",
+              "kind": "strength",
+              "optional": false,
+              "sets": 3,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 12,
+                "perSide": false
+              },
+              "restSeconds": [
+                90,
+                120
+              ],
+              "rir": [
+                2,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": 35,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "cable-lateral-raise",
+              "name": "Cable Lateral Raise",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 12,
+                "repsMax": 15,
+                "perSide": true
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              },
+              "alternatives": [
+                {
+                  "exerciseId": "machine-lateral-raise",
+                  "name": "Machine Lateral Raise",
+                  "whenToUse": "More comfortable or convenient.",
+                  "prescription": "2 x 12-15 at 2 RIR."
+                }
+              ]
+            },
+            {
+              "exerciseId": "rope-triceps-pressdown",
+              "name": "Rope Triceps Pressdown",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                1,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "cable-bicep-curl",
+              "name": "Cable Biceps Curl",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                1,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "treadmill-walk",
+              "name": "Treadmill Walk",
+              "kind": "cardio",
+              "optional": false,
+              "sets": 1,
+              "target": {
+                "durationSecondsMin": 600,
+                "durationSecondsMax": 600,
+                "perSide": false
+              },
+              "restSeconds": [
+                0,
+                0
+              ],
+              "rir": [
+                null,
+                null
+              ],
+              "load": {
+                "mode": "none",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              },
+              "intensityInstruction": "Brisk conversational pace."
+            }
+          ],
+          "cooldown": [
+            {
+              "instruction": "Easy walking and breathing",
+              "durationSeconds": 120,
+              "repetitions": null
+            }
+          ]
+        },
+        {
+          "sessionId": "session-2",
+          "title": "Lower A + Core",
+          "type": "strength",
+          "optional": false,
+          "suggestedDay": "Tuesday",
+          "estimatedDurationMinutes": 60,
+          "warmup": [
+            {
+              "instruction": "Easy treadmill or bike plus practice sets",
+              "durationSeconds": 300,
+              "repetitions": null
+            }
+          ],
+          "exercises": [
+            {
+              "exerciseId": "supine-heel-taps",
+              "name": "Supine Heel Taps",
+              "kind": "core",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 12,
+                "perSide": true
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                3,
+                4
+              ],
+              "load": {
+                "mode": "bodyweight",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              }
+            },
+            {
+              "exerciseId": "leg-press",
+              "name": "Leg Press",
+              "kind": "strength",
+              "optional": false,
+              "sets": 3,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 12,
+                "perSide": false
+              },
+              "restSeconds": [
+                90,
+                120
+              ],
+              "rir": [
+                1,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": 80,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "barbell-romanian-deadlift",
+              "name": "Barbell Romanian Deadlift",
+              "kind": "strength",
+              "optional": false,
+              "sets": 3,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 10,
+                "perSide": false
+              },
+              "restSeconds": [
+                120,
+                150
+              ],
+              "rir": [
+                1,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": 30,
+                "basis": "total-including-bar"
+              }
+            },
+            {
+              "exerciseId": "leg-extension",
+              "name": "Leg Extension",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                60,
+                90
+              ],
+              "rir": [
+                1,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "seated-leg-curl",
+              "name": "Seated Leg Curl",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                60,
+                90
+              ],
+              "rir": [
+                1,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": 35,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "calf-raise",
+              "name": "Calf Raise",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 12,
+                "repsMax": 20,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                1,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "unknown"
+              }
+            },
+            {
+              "exerciseId": "stationary-bike",
+              "name": "Stationary Bike",
+              "kind": "cardio",
+              "optional": false,
+              "sets": 1,
+              "target": {
+                "durationSecondsMin": 600,
+                "durationSecondsMax": 600,
+                "perSide": false
+              },
+              "restSeconds": [
+                0,
+                0
+              ],
+              "rir": [
+                null,
+                null
+              ],
+              "load": {
+                "mode": "none",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              },
+              "intensityInstruction": "Moderate conversational effort."
+            }
+          ],
+          "cooldown": [
+            {
+              "instruction": "Easy walking and breathing",
+              "durationSeconds": 120,
+              "repetitions": null
+            }
+          ]
+        },
+        {
+          "sessionId": "session-3",
+          "title": "Core + Accessories + Conditioning",
+          "type": "strength",
+          "optional": false,
+          "suggestedDay": "Wednesday",
+          "estimatedDurationMinutes": 55,
+          "warmup": [
+            {
+              "instruction": "Easy walking or cycling",
+              "durationSeconds": 300,
+              "repetitions": null
+            }
+          ],
+          "exercises": [
+            {
+              "exerciseId": "reverse-crunch",
+              "name": "Reverse Crunch",
+              "kind": "core",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                3,
+                4
+              ],
+              "load": {
+                "mode": "bodyweight",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              }
+            },
+            {
+              "exerciseId": "supine-heel-slide",
+              "name": "Supine Heel Slide",
+              "kind": "core",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 12,
+                "perSide": true
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                3,
+                4
+              ],
+              "load": {
+                "mode": "bodyweight",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              }
+            },
+            {
+              "exerciseId": "light-band-external-rotation",
+              "name": "Light Band External Rotation",
+              "kind": "mobility",
+              "optional": true,
+              "sets": 1,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 12,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                4,
+                5
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "unknown"
+              }
+            },
+            {
+              "exerciseId": "reverse-pec-deck",
+              "name": "Reverse Pec Deck",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 12,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "rope-triceps-pressdown",
+              "name": "Rope Triceps Pressdown",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "cable-bicep-curl",
+              "name": "Cable Biceps Curl",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "calf-raise",
+              "name": "Calf Raise",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 12,
+                "repsMax": 20,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                3
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "unknown"
+              }
+            },
+            {
+              "exerciseId": "stationary-bike",
+              "name": "Stationary Bike",
+              "kind": "cardio",
+              "optional": false,
+              "sets": 1,
+              "target": {
+                "durationSecondsMin": 1500,
+                "durationSecondsMax": 1500,
+                "perSide": false
+              },
+              "restSeconds": [
+                0,
+                0
+              ],
+              "rir": [
+                null,
+                null
+              ],
+              "load": {
+                "mode": "none",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              },
+              "intensityInstruction": "Easy-to-moderate steady effort; not HIIT."
+            }
+          ],
+          "cooldown": [
+            {
+              "instruction": "Easy walking and breathing",
+              "durationSeconds": 120,
+              "repetitions": null
+            }
+          ]
+        },
+        {
+          "sessionId": "session-4",
+          "title": "Upper B + Core",
+          "type": "strength",
+          "optional": false,
+          "suggestedDay": "Thursday",
+          "estimatedDurationMinutes": 60,
+          "warmup": [
+            {
+              "instruction": "Easy cardio, shoulder rotations and chest-press practice sets",
+              "durationSeconds": 300,
+              "repetitions": null
+            }
+          ],
+          "exercises": [
+            {
+              "exerciseId": "supine-heel-taps",
+              "name": "Supine Heel Taps",
+              "kind": "core",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 12,
+                "perSide": true
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                3,
+                4
+              ],
+              "load": {
+                "mode": "bodyweight",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              }
+            },
+            {
+              "exerciseId": "neutral-grip-machine-chest-press",
+              "name": "Neutral-Grip Machine Chest Press",
+              "kind": "strength",
+              "optional": false,
+              "sets": 3,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 12,
+                "perSide": false
+              },
+              "restSeconds": [
+                90,
+                120
+              ],
+              "rir": [
+                2,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": 40,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "chest-supported-machine-row",
+              "name": "Chest-Supported Machine Row",
+              "kind": "strength",
+              "optional": false,
+              "sets": 3,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 12,
+                "perSide": false
+              },
+              "restSeconds": [
+                90,
+                120
+              ],
+              "rir": [
+                1,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              },
+              "alternatives": [
+                {
+                  "exerciseId": "seated-cable-row",
+                  "name": "Seated Cable Row",
+                  "whenToUse": "No suitable chest-supported row.",
+                  "prescription": "3 x 8-12 at 1-2 RIR."
+                }
+              ]
+            },
+            {
+              "exerciseId": "neutral-grip-lat-pulldown",
+              "name": "Neutral-Grip Lat Pulldown",
+              "kind": "strength",
+              "optional": false,
+              "sets": 3,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 12,
+                "perSide": false
+              },
+              "restSeconds": [
+                90,
+                120
+              ],
+              "rir": [
+                2,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": 35,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "reverse-pec-deck",
+              "name": "Reverse Pec Deck",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 12,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "cable-lateral-raise",
+              "name": "Cable Lateral Raise",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 12,
+                "repsMax": 15,
+                "perSide": true
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                2,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              },
+              "alternatives": [
+                {
+                  "exerciseId": "machine-lateral-raise",
+                  "name": "Machine Lateral Raise",
+                  "whenToUse": "More comfortable or convenient.",
+                  "prescription": "2 x 12-15 at 2 RIR."
+                }
+              ]
+            },
+            {
+              "exerciseId": "rope-triceps-pressdown",
+              "name": "Rope Triceps Pressdown",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                1,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "cable-bicep-curl",
+              "name": "Cable Biceps Curl",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                1,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "treadmill-walk",
+              "name": "Treadmill Walk",
+              "kind": "cardio",
+              "optional": false,
+              "sets": 1,
+              "target": {
+                "durationSecondsMin": 600,
+                "durationSecondsMax": 600,
+                "perSide": false
+              },
+              "restSeconds": [
+                0,
+                0
+              ],
+              "rir": [
+                null,
+                null
+              ],
+              "load": {
+                "mode": "none",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              },
+              "intensityInstruction": "Brisk conversational pace."
+            }
+          ],
+          "cooldown": [
+            {
+              "instruction": "Easy walking and breathing",
+              "durationSeconds": 120,
+              "repetitions": null
+            }
+          ]
+        },
+        {
+          "sessionId": "session-5",
+          "title": "Lower B + Core",
+          "type": "strength",
+          "optional": false,
+          "suggestedDay": "Friday",
+          "estimatedDurationMinutes": 60,
+          "warmup": [
+            {
+              "instruction": "Easy cardio plus practice sets",
+              "durationSeconds": 300,
+              "repetitions": null
+            }
+          ],
+          "exercises": [
+            {
+              "exerciseId": "reverse-crunch",
+              "name": "Reverse Crunch",
+              "kind": "core",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                3,
+                4
+              ],
+              "load": {
+                "mode": "bodyweight",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              }
+            },
+            {
+              "exerciseId": "belt-squat",
+              "name": "Belt Squat",
+              "kind": "strength",
+              "optional": false,
+              "sets": 3,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 12,
+                "perSide": false
+              },
+              "restSeconds": [
+                90,
+                120
+              ],
+              "rir": [
+                1,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              },
+              "alternatives": [
+                {
+                  "exerciseId": "leg-press",
+                  "name": "Leg Press",
+                  "whenToUse": "No belt squat.",
+                  "prescription": "3 x 8-12 at 1-2 RIR."
+                },
+                {
+                  "exerciseId": "bodyweight-squat",
+                  "name": "Bodyweight Squat",
+                  "whenToUse": "No comfortable machine option.",
+                  "prescription": "3 x 12-20 at 1-2 RIR."
+                }
+              ]
+            },
+            {
+              "exerciseId": "reverse-lunge",
+              "name": "Reverse Lunge",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 8,
+                "repsMax": 10,
+                "perSide": true
+              },
+              "restSeconds": [
+                75,
+                90
+              ],
+              "rir": [
+                1,
+                2
+              ],
+              "load": {
+                "mode": "bodyweight",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              },
+              "alternatives": [
+                {
+                  "exerciseId": "forward-lunge",
+                  "name": "Forward Lunge",
+                  "whenToUse": "Preferred and equally comfortable.",
+                  "prescription": "2 x 8-10 per side at 1-2 RIR."
+                }
+              ]
+            },
+            {
+              "exerciseId": "seated-leg-curl",
+              "name": "Seated Leg Curl",
+              "kind": "strength",
+              "optional": false,
+              "sets": 3,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                60,
+                90
+              ],
+              "rir": [
+                1,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": 35,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "leg-extension",
+              "name": "Leg Extension",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 10,
+                "repsMax": 15,
+                "perSide": false
+              },
+              "restSeconds": [
+                60,
+                90
+              ],
+              "rir": [
+                1,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "machine-displayed"
+              }
+            },
+            {
+              "exerciseId": "calf-raise",
+              "name": "Calf Raise",
+              "kind": "strength",
+              "optional": false,
+              "sets": 2,
+              "target": {
+                "repsMin": 12,
+                "repsMax": 20,
+                "perSide": false
+              },
+              "restSeconds": [
+                45,
+                60
+              ],
+              "rir": [
+                1,
+                2
+              ],
+              "load": {
+                "mode": "external",
+                "suggestedKg": null,
+                "basis": "unknown"
+              }
+            },
+            {
+              "exerciseId": "stationary-bike",
+              "name": "Stationary Bike",
+              "kind": "cardio",
+              "optional": false,
+              "sets": 1,
+              "target": {
+                "durationSecondsMin": 600,
+                "durationSecondsMax": 600,
+                "perSide": false
+              },
+              "restSeconds": [
+                0,
+                0
+              ],
+              "rir": [
+                null,
+                null
+              ],
+              "load": {
+                "mode": "none",
+                "suggestedKg": null,
+                "basis": "not-applicable"
+              },
+              "intensityInstruction": "Moderate conversational effort."
+            }
+          ],
+          "cooldown": [
+            {
+              "instruction": "Easy walking and breathing",
+              "durationSeconds": 120,
+              "repetitions": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "changesFromPreviousPlan": [
+    {
+      "change": "Five weekday gym visits are prescribed, with Wednesday deliberately lower-fatigue.",
+      "reason": "Matches preferred attendance while maintaining recovery between main upper and lower sessions."
+    },
+    {
+      "change": "Core is required at the beginning of all five sessions.",
+      "reason": "Frequent core training was valued and well tolerated in previous successful programmes."
+    },
+    {
+      "change": "Chest, biceps, triceps, lateral deltoids, rear deltoids and calves receive substantially more direct work.",
+      "reason": "These areas were under-covered by adapted-8-week-v2."
+    },
+    {
+      "change": "The programme now uses two upper and two lower primary sessions.",
+      "reason": "Improves muscle-group frequency, recovery and time efficiency."
+    },
+    {
+      "change": "Burpees, jumping lunges, mountain climbers and mandatory HIIT are absent.",
+      "reason": "They are not required for the current fat-loss or muscle-retention goals and carry unnecessary fatigue or impact cost."
+    },
+    {
+      "change": "No loaded overhead press is prescribed during this block.",
+      "reason": "The shoulder remains undiagnosed and only one week of current loaded upper-body tolerance is available."
+    },
+    {
+      "change": "Chest press and neutral-grip pulldown remain with monitored progression.",
+      "reason": "Week 1 produced only transient non-painful awareness or tightness with no delayed symptoms."
+    },
+    {
+      "change": "Progression uses repetitions, RIR, technique and symptom response instead of automatic weekly load increases.",
+      "reason": "Allows progressive overload without unnecessary fatigue or shoulder risk."
+    }
+  ],
+  "questionsBeforeStarting": [
+    "Confirm in person whether the gym has a chest-supported row, cable or machine lateral-raise setup, reverse pec-deck and belt-squat machine. Use the listed alternatives when equipment is unavailable."
+  ]
+}
